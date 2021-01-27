@@ -11,22 +11,16 @@ const Home = () => {
     <h1 className="text-center text-uppercase mt-4 mb-3">Home</h1>
     <div className="container-fluid d-flex justify-content-center">
       <div className="row">
-        <div className="col-md-4">
-          <CardUI imgSrc={paintingImage} title="Cuadros" option="Cuadros" url="paintings" />
+        <div className="col-md-6">
+          <CardUI imgSrc={paintingImage} title="Cuadros" option="Cuadros" url="paintings" description="Visualiza, edita y borra los cuadros disponibles."/>
         </div>
-        <div className="col-md-4">
+        <div className="col-md-6">
           <CardUI
             imgSrc={historyImage}
             title="Historial de pedidos"
             option="Historial"
             url="history"
-          />
-        </div>
-        <div className="col-md-4">
-          <CardUI
-            imgSrc={logoutImage}
-            title="Cerrar Sesión"
-            option="Cerrar sesión"
+            description="Visualiza y edita todos los pedidos realizados."
           />
         </div>
       </div>
