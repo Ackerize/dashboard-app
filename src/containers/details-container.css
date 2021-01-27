@@ -17,9 +17,14 @@
   margin-left: 3rem;
 }
 
+.text-container-product {
+  margin: auto;
+}
+
 .product-name {
   align-self: center;
   margin-left: 2rem;
+  width: fit-content;
 }
 
 .table.table-details {
@@ -63,4 +68,23 @@
   margin-left: 2rem;
   width: fit-content;
   font-style: italic;
+}
+
+.footer-details {
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+.btn.btn-container.btn-back{
+  height: fit-content;
+  margin: auto;
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+  border-color: black;
+  color: black;
+}
+
+.btn.btn-container.btn-back:hover{
+  background-color: black;
+  color: white;
 }

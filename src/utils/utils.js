@@ -1,5 +1,6 @@
 import { map } from "lodash";
-import moment from 'moment';
+import moment from "moment";
+import React from "react";
 
 export const cabecerasPaintings = [
   "Cuadro",
@@ -66,9 +67,8 @@ export const findStatus = (status) => {
 export const statuses = [
   { value: "PENDIENTE", label: "PENDIENTE" },
   { value: "CONFIRMADA", label: "CONFIRMADA" },
-  { value: "CANCELADA", label: "CANCELADA" },
   { value: "EN PROCESO", label: "EN PROCESO" },
-  { value: "ENVIADA", label: "ENVIADA" },
+  { value: "EN CAMINO", label: "EN CAMINO" },
   { value: "ENTREGADA", label: "ENTREGADA" },
 ];
 
@@ -108,13 +108,15 @@ export const sortBy = (type) => {
         return 0;
       };
     case "fecha-orden":
-      return (a,b) => {
-        const dateA = new Date(a.order_date), dateB = new Date(b.order_date);
+      return (a, b) => {
+        const dateA = new Date(a.order_date),
+          dateB = new Date(b.order_date);
         return dateA - dateB;
       };
     case "fecha-entrega":
-      return (a,b) => {
-        const dateA = new Date(a.delivery_date), dateB = new Date(b.delivery_date);
+      return (a, b) => {
+        const dateA = new Date(a.delivery_date),
+          dateB = new Date(b.delivery_date);
         return dateA - dateB;
       };
     default:
@@ -124,4 +126,57 @@ export const sortBy = (type) => {
 
 export const formatDate = (date) => {
   return moment(date).format("YYYY-MM-DD");
-}
+};
+
+export const progressOrderBar = (status) => {
+  switch (status) {
+    case "EN PROCESO":
+    case "PENDIENTE":
+      return (
+        <>
+          <li className="active step0"></li>
+          <li className="step0"></li>
+          <li className="step0"></li>
+          <li className="step0"></li>
+        </>
+      );
+    case "CONFIRMADA":
+      return (
+        <>
+          <li className="active step0"></li>
+          <li className="active step0"></li>
+          <li className="step0"></li>
+          <li className="step0"></li>
+        </>
+      );
+    case "EN CAMINO":
+      return (
+        <>
+          <li className="active step0"></li>
+          <li className="active step0"></li>
+          <li className="active step0"></li>
+          <li className="step0"></li>
+        </>
+      );
+    case "ENTREGADA":
+      return (
+        <>
+          <li className="active step0"></li>
+          <li className="active step0"></li>
+          <li className="active step0"></li>
+          <li className="active step0"></li>
+        </>
+      );
+    default:
+      return (
+        <>
+          <li className="step0"></li>
+          <li className="step0"></li>
+          <li className="step0"></li>
+          <li className="step0"></li>
+        </>
+      );
+  }
+};
+
+export const formatFloat = (number) => parseFloat(number).toFixed(2);

@@ -2,6 +2,7 @@ import React from "react";
 import * as BiIcon from "react-icons/bi";
 import * as TiIcon from "react-icons/ti";
 import * as AiIcon from "react-icons/ai";
+import * as IoIcon from "react-icons/io";
 import { useHistory } from "react-router-dom";
 import "./Navbar.css";
 import { submit } from "./ConfirmModal";
@@ -35,9 +36,16 @@ const Button = ({ type, onClick }) => {
       );
     case "view":
       return (
-        <button type="button" className="btn btn-container btn-view">
+        <button type="button" className="btn btn-container btn-view" onClick={onClick}>
           <AiIcon.AiOutlineEye style={{ marginTop: 5, fontSize: 22 }} />
           <p className="btn-text">Ver</p>
+        </button>
+      )
+    case "back":
+      return (
+        <button type="button" className="btn btn-container btn-back" onClick={onClick}>
+          <IoIcon.IoMdArrowBack style={{ marginTop: 5, fontSize: 22 }} />
+          <p className="btn-text">Regresar</p>
         </button>
       )
     default:

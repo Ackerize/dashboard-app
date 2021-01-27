@@ -1,22 +1,22 @@
 import React from "react";
 
-const SummaryOrder = () => {
+const SummaryOrder = ({ subtotal, delivery_cost, total }) => {
   return (
-    <>
+    <div>
       <p className="title-info summary-text">Resumen</p>
       <div className="summary-container">
         <p className="text-summary-desc">
-          Subtotal: <span className="subtotal-cost">$ 50.00</span>
+          Subtotal: <span className="subtotal-cost">{`$ ${subtotal}`}</span>
         </p>
         <p className="text-summary-desc">
-          Envío: <span className="delivery-cost">$ 3.00</span>
+          Envío: <span className="delivery-cost">{`$ ${delivery_cost}`}</span>
         </p>
         <hr />
         <p className="text-summary-desc total-text">
-          Total: <span className="total-cost">$ 53.00</span>
+          Total: <span className="total-cost">{`$ ${total}`}</span>
         </p>
       </div>
-    </>
+    </div>
   );
 };
 

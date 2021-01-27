@@ -4,29 +4,29 @@ import step1 from "../assets/step1.png";
 import step2 from "../assets/step2.png";
 import step3 from "../assets/step3.png";
 import step4 from "../assets/step4.png";
+import { progressOrderBar } from "../utils/utils";
+import moment from "moment";
 
-const HeaderOrderDetails = () => {
+const HeaderOrderDetails = ({ order }) => {
+  const { status, id, delivery_date } = order;
   return (
     <>
       <div className="row d-flex justify-content-between px-3 top">
         <div className="d-flex header-bar">
           <h5>
-            ORDER <span className="text-primary font-weight-bold">#1</span>
+            ORDER <span className="text-primary font-weight-bold">{`# ${id}`}</span>
           </h5>
         </div>
         <div className="d-flex flex-column text-sm-right">
           <p className="mb-0">
-            Fecha de entrega: <span>01/12/19</span>
+            Fecha de entrega: <span>{moment(delivery_date).format("DD-MM-YYYY")}</span>
           </p>
         </div>
       </div>
       <div className="row d-flex justify-content-center">
         <div className="col-12">
           <ul id="progressbar" className="text-center">
-            <li className="active step0"></li>
-            <li className="step0"></li>
-            <li className="step0"></li>
-            <li className="step0"></li>
+            {progressOrderBar(status)}
           </ul>
         </div>
       </div>

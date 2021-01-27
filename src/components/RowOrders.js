@@ -1,6 +1,7 @@
 import moment from "moment";
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
+import { getOrderDetail } from "../api/orders";
 import { findStatus } from "../utils/utils";
 import Button from "./Button";
 
@@ -16,6 +17,7 @@ const RowOrders = ({ order, setShowModal, setActualOrder }) => {
   } = order;
 
   const { name } = delivery_zone;
+  const history = useHistory();
 
   const orderDate = moment(order_date).format("DD/MM/YYYY hh:mm");
   const deliveryDate = moment(delivery_date).format("DD/MM/YYYY hh:mm");
@@ -23,6 +25,12 @@ const RowOrders = ({ order, setShowModal, setActualOrder }) => {
   const onEdit = () => {
     setActualOrder(order);
     setShowModal(true);
+  };
+
+  const onView = () => {
+    history.push({
+      pathname: `/order/view/${id}`,
+    });
   };
 
   return (
@@ -37,7 +45,7 @@ const RowOrders = ({ order, setShowModal, setActualOrder }) => {
         <td>{`$ ${total_amount}`}</td>
         <td>
           <div className="cell-container">
-            <Button type="view" onClick={() => setActualOrder(order)} />
+            <Button type="view" onClick={onView} />
             <Button type="edit" onClick={onEdit} />
           </div>
         </td>

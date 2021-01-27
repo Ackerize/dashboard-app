@@ -1,6 +1,16 @@
 import React from "react";
 
-const CustomerInfo = () => {
+const CustomerInfo = ({ order }) => {
+  const {
+    customer_name,
+    delivery_address,
+    email,
+    delivery_zone,
+    customer_phone
+  } = order;
+
+  const { name:delivery_zone_name} = delivery_zone;
+
   return (
     <>
       <p className="title-info">Información del cliente</p>
@@ -12,10 +22,11 @@ const CustomerInfo = () => {
           >
             Dirrección de entrega:{" "}
           </p>
-          <p>Cristian Mundo</p>
-          <p>cmundo@gmail.com</p>
-          <p>Colonia San Mauricio</p>
-          <p>Santa Elena</p>
+          <p>{customer_name}</p>
+          <p>{email}</p>
+          <p>{`+503 ${customer_phone}`}</p>
+          <p>{delivery_address}</p>
+          <p>{delivery_zone_name}</p>
         </div>
       </div>
     </>

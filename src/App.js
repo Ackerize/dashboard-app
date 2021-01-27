@@ -14,10 +14,11 @@ export const App = () => {
       <Router>
         <Navbar />
         <Switch>
-          <Route path="/" exact component={Details} />
+          <Route path="/" exact component={Home} />
           <Route exact path="/paintings" component={Paintings} />
           <Route exact path="/history" component={History} />
           <Route exact path="/paintings/form" component={FormPaintings} />
+          <Route exact path="/order/view/:id" component={Details} />
         </Switch>
       </Router>
     </>
