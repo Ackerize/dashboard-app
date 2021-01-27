@@ -9,7 +9,7 @@ const TableOrders = ({ orders }) => {
   const [actualOrder, setActualOrder] = useState(null);
 
   return (
-    <div className="table-container">
+    <div className="table-container table-responsive">
       {showModal && (
         <ModalOrder showModal={showModal} setShowModal={setShowModal} order={actualOrder} />
       )}

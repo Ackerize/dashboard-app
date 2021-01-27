@@ -14,7 +14,7 @@ const SelectForm = ({ options, placeholder, noOptionsMessage, name, onChange, la
             options={options}
             name={name}
             defaultValue={value}
-            className="w-100 custom-control"
+            className="w-100 custom-control-modal"
             components={animatedComponents}
             placeholder={placeholder}
             onChange={(selectedOption) => onChange(selectedOption, name)}

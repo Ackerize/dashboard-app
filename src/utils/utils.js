@@ -55,10 +55,15 @@ export const dataDelete = {
 
 export const findStatus = (status) => {
   switch (status) {
+    case "PENDIENTE":
     case "EN PROCESO":
       return "status pending";
+    case "CONFIRMADA":
+      return "status confirmed"
     case "ENTREGADA":
       return "status delivered";
+    case "EN CAMINO":
+      return "status shipped";
     default:
       return "";
   }

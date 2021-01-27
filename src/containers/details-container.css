@@ -88,3 +88,10 @@
   background-color: black;
   color: white;
 }
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .card-container-delivery {
+    margin: 0 auto;
+    width: inherit;
+  }
+}
