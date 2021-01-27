@@ -1,0 +1,13 @@
+.title-info {
+  width: fit-content;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  margin-left: 4.5rem;
+  font-weight: bold;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.product-title{
+  margin-top: 4rem;
+}

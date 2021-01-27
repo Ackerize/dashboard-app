@@ -1,0 +1,100 @@
+.date-range .input {
+  width: 100%;
+}
+
+.date-range {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input {
+  background-color: #fff;
+  border-radius: 6px;
+  border: 1px solid #d3dde6;
+  color: #0e3254;
+  font-family: inherit;
+  font-size: inherit;
+  height: 42px;
+  outline: none;
+  padding: 0 12px;
+  transition: border-color 0.2s;
+}
+
+.nice-dates-day {
+  color: #21ab91;
+}
+
+.nice-dates-popover {
+  box-shadow: none;
+  border-radius: 5px;
+  max-width: 480px;
+  transition: none;
+  border: 1px solid black;
+  margin-left: 1.7rem;
+}
+
+.span{
+  margin-left: 0;
+}
+
+
+
+.nice-dates-day.-today {
+  font-weight: 900;
+  color: #105548;
+  font-size: 18px;
+}
+
+.nice-dates-day::after {
+  border: 2px solid #21ab91;
+  transform: scale(.95);
+  transition-duration: .15s;
+  transition-property: transform, opacity;
+  z-index: 2;
+}
+
+.nice-dates-day_date {
+  transition: color 0.15s;
+  will-change: color;
+  z-index: 3;
+}
+
+.header-order-table .nice-dates {
+  width: 70%;
+  margin-left: 4rem;
+}
+
+
+.nice-dates-day::before {
+  background-color: #21ab91;
+  z-index: 1;
+}
+
+.example_preview {
+  margin: 24px;
+  position: relative;
+  transform: translate(0);
+}
+
+.date-range_arrow {
+  flex-shrink: 0;
+  position: relative;
+  width: 36px;
+}
+
+.date-range_arrow::before {
+  border-right: 2px solid #d3dde6;
+  border-top: 2px solid #d3dde6;
+  box-sizing: border-box;
+  content: "";
+  display: block;
+  height: 18px;
+  left: 50%;
+  margin-left: -14px;
+  margin-top: -9px;
+  position: absolute;
+  top: 50%;
+  transform: rotate(45deg);
+  width: 18px;
+}
+
