@@ -1,6 +1,7 @@
 import React from "react";
 import CustomerInfo from "../components/CustomerInfo";
 import HeaderOrderDetails from "../components/HeaderOrderDetails";
+import SummaryOrder from "../components/SummaryOrder";
 import TableDetails from "../components/TableDetails";
 import "./details-container.css";
 
@@ -12,8 +13,10 @@ const Details = () => {
         <hr className="hr-order-details" />
         <CustomerInfo />
         <div>
-          <p className="title-info product-title">Información de productos</p>
           <TableDetails />
+        </div>
+        <div>
+          <SummaryOrder />
         </div>
       </div>
     </div>

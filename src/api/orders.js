@@ -11,3 +11,11 @@ export function getAllOrders(){
     return result;
   })
 }
+
+export function getOrderDetail(idOrder){
+  const url = `${API_HOST}/orders-details/order/${idOrder}`;
+
+  return fetch(url)
+  .then((response) => response.json())
+  .then((result) => result)
+}

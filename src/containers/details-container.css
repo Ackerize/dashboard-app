@@ -11,3 +11,56 @@
 .product-title{
   margin-top: 4rem;
 }
+
+.container-product-item{
+  display: flex;
+  margin-left: 3rem;
+}
+
+.product-name {
+  align-self: center;
+  margin-left: 2rem;
+}
+
+.table.table-details {
+  width: 80% !important;
+  margin-left: 4.5rem;
+}
+
+.summary-container {
+  margin-left: 4.5rem;
+  width: fit-content;
+  font-size: 17px;
+}
+
+.summary-text{
+  margin-top: 1rem;
+}
+
+.total-text {
+  font-weight: 900;
+}
+
+.text-summary-desc{
+  padding: 8px;
+}
+
+.subtotal-cost {
+  padding-left: 2rem;
+}
+
+.delivery-cost {
+  padding-left: 3rem;
+}
+
+.total-cost {
+  padding-left: 3rem;
+}
+
+.description-product-item{
+  font-weight: 300;
+  color: dimgrey;
+  margin-left: 2rem;
+  width: fit-content;
+  font-style: italic;
+}

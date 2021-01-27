@@ -1,5 +1,6 @@
 import moment from "moment";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { findStatus } from "../utils/utils";
 import Button from "./Button";
 
@@ -36,7 +37,7 @@ const RowOrders = ({ order, setShowModal, setActualOrder }) => {
         <td>{`$ ${total_amount}`}</td>
         <td>
           <div className="cell-container">
-            <Button type="view" />
+            <Button type="view" onClick={() => setActualOrder(order)} />
             <Button type="edit" onClick={onEdit} />
           </div>
         </td>
