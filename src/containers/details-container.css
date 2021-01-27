@@ -95,3 +95,38 @@
     width: inherit;
   }
 }
+
+@media (min-width: 426px) and (max-width: 768px) {
+  .card-container-delivery {
+    margin: 0 auto;
+    width: inherit;
+  }
+
+  img.icon {
+    width: 60px;
+    height: 40px;
+  }
+
+  img.product-img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .row.justify-content-between.container-labels {
+    font-size: 12px;
+    flex-direction: row;
+    flex-wrap: nowrap !important;
+  }
+
+  .description-product-item.dimensions{
+    font-size: 11px !important;
+  }
+  .description-product-item.material-name{
+    font-size: 14px !important;
+  }
+
+  .row.d-flex.icon-content.icon-container {
+    flex-direction: row;
+  }
+
+}

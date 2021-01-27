@@ -15,8 +15,8 @@ const RowDetails = ({ order }) => {
           <img className="product-img" src={image_url} width="80px" />
           <div className="text-container-product">
             <p className="product-name">{painting_name}</p>
-            <p className="description-product-item">{material_name}</p>
-            <p className="description-product-item">{measurements}</p>
+            <p className="description-product-item material-name">{material_name}</p>
+            <p className="description-product-item dimensions">{measurements}</p>
           </div>
         </div>
       </th>

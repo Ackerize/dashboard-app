@@ -405,10 +405,6 @@ input[type="radio"] {
   margin: 0 0.5rem;
 }
 
-.active {
-  z-index: 5;
-}
-
 .nav-menu{
   z-index: 5;
 }
