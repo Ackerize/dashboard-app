@@ -491,6 +491,9 @@ input[type="radio"] {
   .header-order-table .nice-dates {
     margin-left: 6.5rem !important;
   }
+  .md-form {
+    width: 40%;
+  }
 }
 
 @media (min-width: 1680px) and (max-width: 1949px) {
@@ -546,6 +549,10 @@ input[type="radio"] {
 
   .nice-dates {
     width: 80% !important;
+  }
+
+  .md-form {
+    width: 40%;
   }
 }
 
@@ -616,6 +623,11 @@ input[type="radio"] {
     width: 100%;
     margin-right: 0;
     flex-direction: column;
+  }
+
+  .btn-add.btn{
+    line-height: 1.5 !important	;
+    padding: 0.375rem 0.75rem !important;
   }
 
   .table-light.text-center {
