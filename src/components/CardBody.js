@@ -97,7 +97,7 @@ const CardBody = ({ btnText }) => {
   };
 
   return (
-    <div className="card-body">
+    <div className="card-body card-body-painting">
       <form onSubmit={handleSubmit(onSubmitData)}>
         <div className="form-row">
           <div className="name">Nombre: </div>
