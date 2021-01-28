@@ -9,7 +9,7 @@ const TablePaintings = ({ paintingsArray }) => {
   return (
     <div className="table-paintings table-responsive">
       <table className="table">
-        <thead className="table-light 0">
+        <thead className="table-light text-center">
           <tr>
             {map(cabecerasPaintings, (cabecera, index) => (
               <th key={index}>{cabecera}</th>

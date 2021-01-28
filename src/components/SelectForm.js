@@ -2,7 +2,7 @@ import React from "react";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
-const SelectForm = ({ options, placeholder, noOptionsMessage, name, onChange, label, error, errorMessage, className, value }) => {
+const SelectForm = ({ options, placeholder, noOptionsMessage, name, onChange, label, error, errorMessage, className, value, isMulti }) => {
   const animatedComponents = makeAnimated();
 
   return (
@@ -19,6 +19,7 @@ const SelectForm = ({ options, placeholder, noOptionsMessage, name, onChange, la
             placeholder={placeholder}
             onChange={(selectedOption) => onChange(selectedOption, name)}
             isSearchable
+            isMulti={isMulti}
             noOptionsMessage={(inputValue) => `${noOptionsMessage}`}
           />
           {error && (

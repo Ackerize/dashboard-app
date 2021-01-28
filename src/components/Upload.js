@@ -3,7 +3,7 @@ import { storage } from "../firebase/firebase";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { generateString } from "../utils/utils";
 
-const Upload = ({ setValue }) => {
+const Upload = ({ setValue, setUrlImg, error }) => {
   const [ready, setReady] = useState(false);
   const [lastImage, setLastImage] = useState("");
   const [progress, setProgress] = useState(0);
@@ -48,6 +48,7 @@ const Upload = ({ setValue }) => {
           .then((url) => {
             setUrl(url);
             setValue('image_url', url);
+            setUrlImg(newName);
           });
         setLastImage(newName);
         setReady(true);
@@ -106,7 +107,7 @@ const Upload = ({ setValue }) => {
         margin="20px auto 10px auto"
         labelAlignment="right"
       />
-      {url === '' && <div className="error-img">Seleccione la imagen del cuadro</div>}
+      {error && <div className="error-img">Seleccione la imagen del cuadro</div>}
     </div>
   );
 };

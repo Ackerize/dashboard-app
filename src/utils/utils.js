@@ -59,7 +59,7 @@ export const findStatus = (status) => {
     case "EN PROCESO":
       return "status pending";
     case "CONFIRMADA":
-      return "status confirmed"
+      return "status confirmed";
     case "ENTREGADA":
       return "status delivered";
     case "EN CAMINO":
@@ -185,3 +185,19 @@ export const progressOrderBar = (status) => {
 };
 
 export const formatFloat = (number) => parseFloat(number).toFixed(2);
+
+export const filterMeasurements = (collection, idMaterial) => {
+  return collection.filter((item) => item.material_id == idMaterial);
+};
+
+export const formatArrayMeasurements = (array, materials) =>
+  map(array, (item) => {
+    const materialName = findMaterial(materials, item.material_id);
+    return {
+      label: `Ancho: ${item.width} - Alto: ${item.height} - Material: ${materialName}`,
+      value: item.id,
+    };
+  });
+
+const findMaterial = (materials, idMaterial) =>
+  materials.filter((item) => item.value == idMaterial)[0].label;

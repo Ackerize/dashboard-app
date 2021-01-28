@@ -757,9 +757,13 @@ input {
   border-top-right-radius: 10px;
 }
 
-.card-5 .card-body {
-  padding: 52px 85px;
-  padding-bottom: 73px;
+.card-5 div.card-body {
+  padding: 52px 85px !important	;
+  padding-bottom: 73px !important;
+}
+
+.card-painting{
+  margin-top: 40px !important;
 }
 
 hr.hr-order-details{
