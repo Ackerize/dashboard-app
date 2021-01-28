@@ -12,7 +12,7 @@ const Home = () => {
     <div className="container-fluid d-flex justify-content-center">
       <div className="row">
         <div className="col-md-6">
-          <CardUI imgSrc={paintingImage} title="Cuadros" option="Cuadros" url="paintings" description="Visualiza, edita y borra los cuadros disponibles."/>
+          <CardUI imgSrc={paintingImage} title="Cuadros" option="Cuadros" url="paintings" description="Visualiza y edita los cuadros disponibles."/>
         </div>
         <div className="col-md-6">
           <CardUI
@@ -20,7 +20,7 @@ const Home = () => {
             title="Historial de pedidos"
             option="Historial"
             url="history"
-            description="Visualiza y edita todos los pedidos realizados."
+            description="Visualiza y edita los pedidos disponibles."
           />
         </div>
       </div>
