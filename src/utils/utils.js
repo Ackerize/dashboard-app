@@ -194,7 +194,7 @@ export const formatArrayMeasurements = (array, materials) =>
   map(array, (item) => {
     const materialName = findMaterial(materials, item.material_id);
     return {
-      label: `Ancho: ${item.width} - Alto: ${item.height} - Material: ${materialName}`,
+      label: `${item.width} x ${item.height} cm -  ${materialName}`,
       value: item.id,
     };
   });

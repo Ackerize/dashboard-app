@@ -20,7 +20,7 @@ const RowDetails = ({ order }) => {
           </div>
         </div>
       </th>
-      <td width="20%">{`$ ${price}`}</td>
+      <td width="20%" className="row-price">{`$ ${price}`}</td>
       <td width="20%">{quantity}</td>
       <td width="20%">{`$ ${amount}`}</td>
     </tr>

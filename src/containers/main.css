@@ -1,4 +1,3 @@
-
 /* ==========================================================================
    #FONT
    ========================================================================== */
@@ -171,7 +170,9 @@ html {
   margin: 0;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   -webkit-box-sizing: inherit;
   -moz-box-sizing: inherit;
   box-sizing: inherit;
@@ -184,12 +185,23 @@ html {
  * A very simple reset that sits on top of Normalize.css.
  */
 body,
-h1, h2, h3, h4, h5, h6,
-blockquote, p, pre,
-dl, dd, ol, ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+blockquote,
+p,
+pre,
+dl,
+dd,
+ol,
+ul,
 figure,
 hr,
-fieldset, legend {
+fieldset,
+legend {
   margin: 0;
   padding: 0;
 }
@@ -239,7 +251,12 @@ body {
   font-size: 14px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 400;
 }
 
@@ -279,7 +296,13 @@ h6 {
 }
 
 .bg-gra-01 {
-  background: -webkit-gradient(linear, left bottom, left top, from(#fbc2eb), to(#a18cd1));
+  background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    from(#fbc2eb),
+    to(#a18cd1)
+  );
   background: -webkit-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
   background: -moz-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
   background: -o-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
@@ -287,7 +310,13 @@ h6 {
 }
 
 .bg-gra-02 {
-  background: -webkit-gradient(linear, left bottom, right top, from(#fc2c77), to(#6c4079));
+  background: -webkit-gradient(
+    linear,
+    left bottom,
+    right top,
+    from(#fc2c77),
+    to(#6c4079)
+  );
   background: -webkit-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
   background: -moz-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
   background: -o-linear-gradient(bottom left, #fc2c77 0%, #6c4079 100%);
@@ -295,7 +324,13 @@ h6 {
 }
 
 .bg-gra-03 {
-  background: -webkit-gradient(linear, left bottom, right top, from(#08aeea), to(#b721ff));
+  background: -webkit-gradient(
+    linear,
+    left bottom,
+    right top,
+    from(#08aeea),
+    to(#b721ff)
+  );
   background: -webkit-linear-gradient(bottom left, #08aeea 0%, #b721ff 100%);
   background: -moz-linear-gradient(bottom left, #08aeea 0%, #b721ff 100%);
   background: -o-linear-gradient(bottom left, #08aeea 0%, #b721ff 100%);
@@ -452,7 +487,8 @@ input[type="date" i] {
   padding: 14px;
 }
 
-.table-condensed td, .table-condensed th {
+.table-condensed td,
+.table-condensed th {
   font-size: 14px;
   font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
   font-weight: 400;
@@ -473,7 +509,8 @@ input[type="date" i] {
   margin-top: 5px;
 }
 
-.daterangepicker::after, .daterangepicker::before {
+.daterangepicker::after,
+.daterangepicker::before {
   display: none;
 }
 
@@ -662,7 +699,10 @@ input {
   background: transparent;
 }
 
-.rs-select2 .select2-container .select2-selection--single .select2-selection__rendered {
+.rs-select2
+  .select2-container
+  .select2-selection--single
+  .select2-selection__rendered {
   line-height: 50px;
   padding-left: 0;
   color: #555;
@@ -672,7 +712,10 @@ input {
   padding-right: 50px;
 }
 
-.rs-select2 .select2-container .select2-selection--single .select2-selection__arrow {
+.rs-select2
+  .select2-container
+  .select2-selection--single
+  .select2-selection__arrow {
   height: 50px;
   right: 15px;
   display: -webkit-box;
@@ -692,13 +735,20 @@ input {
   align-items: center;
 }
 
-.rs-select2 .select2-container .select2-selection--single .select2-selection__arrow b {
+.rs-select2
+  .select2-container
+  .select2-selection--single
+  .select2-selection__arrow
+  b {
   display: none;
 }
 
-.rs-select2 .select2-container .select2-selection--single .select2-selection__arrow:after {
+.rs-select2
+  .select2-container
+  .select2-selection--single
+  .select2-selection__arrow:after {
   font-family: "Material-Design-Iconic-Font";
-  content: '\f2f9';
+  content: "\f2f9";
   font-size: 24px;
   color: #999;
   -webkit-transition: all 0.4s ease;
@@ -707,7 +757,10 @@ input {
   transition: all 0.4s ease;
 }
 
-.rs-select2 .select2-container.select2-container--open .select2-selection--single .select2-selection__arrow::after {
+.rs-select2
+  .select2-container.select2-container--open
+  .select2-selection--single
+  .select2-selection__arrow::after {
   -webkit-transform: rotate(-180deg);
   -moz-transform: rotate(-180deg);
   -ms-transform: rotate(-180deg);
@@ -762,11 +815,11 @@ input {
   padding-bottom: 73px !important;
 }
 
-.card-painting{
+.card-painting {
   margin-top: 40px !important;
 }
 
-hr.hr-order-details{
+hr.hr-order-details {
   width: 90%;
   margin: 20px auto;
   height: 2px;
@@ -780,7 +833,7 @@ hr.hr-order-details{
 
 .address-delivery.text {
   width: fit-content;
-};
+}
 
 @media (max-width: 767px) {
   .card-5 .card-body {
@@ -789,3 +842,111 @@ hr.hr-order-details{
   }
 }
 
+@media (min-width: 320px) and (max-width: 425px) {
+  .d-flex.header-bar {
+    justify-content: flex-start;
+    align-items: stretch;
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .card.card-container-delivery {
+    width: 90% !important;
+    margin: auto !important;
+  }
+
+  .d-flex.delivery {
+    margin-right: 0;
+  }
+
+  .top.container-labels {
+    flex-direction: row;
+    justify-content: stretch !important;
+    flex-wrap: nowrap !important;
+    padding-left: 5% !important;
+  }
+
+  .icon-content.icon-container {
+    padding-left: 1rem;
+  }
+
+  .progress-column {
+    margin-bottom: 0.5rem;
+  }
+
+  img.icon {
+    width: 60px !important;
+    height: 40px !important;
+  }
+
+  .text-label {
+    font-size: 11px !important;
+  }
+
+  .title-info,
+  .address-container,
+  .table.table-details,
+  .summary-container {
+    margin-left: 2rem !important;
+  }
+
+  img.product-img{
+    width: 80px !important;
+    height: 100px !important;
+  }
+
+  .table.table-details{
+    margin-bottom: 1rem !important;
+  }
+
+  .container-product-item {
+    margin-left: 0.5rem !important;
+  }
+
+  .footer-details {
+    flex-direction: column;
+  }
+
+  .btn.btn-container.btn-back{
+    margin: 3rem auto 1.5rem !important;
+  }
+
+  .summary-text{
+    margin-top: 2rem !important;
+  }
+  .title-info.product-title{
+    margin-top: 3rem !important
+  }
+
+  .product-name, .description-product-item{
+    margin-left: 1rem !important;
+  }
+  .text-container-product{
+    text-align: left !important;
+  }
+  .row-price{
+    min-width: 65px !important;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 375px) {
+  .row.justify-content-between.container-labels.delivery{
+    padding-top: 5px !important;
+  }
+  .card.card-container-delivery{
+    width: 95% !important;
+  }
+  .icon-content.icon-container{
+    padding-left: 0.7rem !important;
+  }
+}
+
+@media (max-width: 320px){
+  .icon-content.icon-container.delivery{
+    padding-left: 0.3rem !important;
+    padding-right: 0.3rem !important;
+  }
+  .card.card-container-delivery{
+    width: 95% !important;
+  }
+}
