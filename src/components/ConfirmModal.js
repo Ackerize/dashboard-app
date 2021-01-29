@@ -8,7 +8,8 @@ export const submit = ({
   btnYesText,
   btnNoText,
   btnYesId,
-  btnNoId
+  btnNoId,
+  onClick
 }) => {
   confirmAlert({
     customUI: ({ onClose }) => (
@@ -29,6 +30,7 @@ export const submit = ({
           </button>
           <button
             onClick={() => {
+              onClick();
               onClose();
             }}
             id={btnYesId}

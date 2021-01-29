@@ -26,7 +26,7 @@ const RowPaintings = ({ painting }) => {
       text: "Aún no elimina, falta la validación",
       icon: "success",
       showConfirmButton: false,
-      timer: 1200,
+      timer: 1500,
     });
   }
 

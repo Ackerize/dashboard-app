@@ -65,7 +65,7 @@ const EditBody = ({ painting }) => {
         text: "Aún no actualiza en realidad :b",
         icon: "success",
         showConfirmButton: false,
-        timer: 1200,
+        timer: 1500,
       });
       setTimeout(() => {
         history.push("/paintings");

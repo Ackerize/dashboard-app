@@ -47,10 +47,11 @@ const CardBody = ({ btnText }) => {
     if (flag) {
       console.log(data);
       Swal.fire({
-        title: "¡Orden actualizada!.",
+        title: "¡Cuadro creado!.",
+        text: "Aún no crea en realidad :b",
         icon: "success",
         showConfirmButton: false,
-        timer: 1200,
+        timer: 1500,
       });
     } else {
       Swal.fire({

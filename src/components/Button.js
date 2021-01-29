@@ -22,7 +22,7 @@ const Button = ({ type, onClick }) => {
       );
     case "delete":
       return (
-        <button type="button" className="btn btn-container btn-delete" onClick={() => submit(dataDelete)}>
+        <button type="button" className="btn btn-container btn-delete" onClick={() => submit({...dataDelete, onClick})}>
           <TiIcon.TiDeleteOutline style={{ marginTop: 5, fontSize: 22 }} />
           <p className="btn-text">Borrar</p>
         </button>
