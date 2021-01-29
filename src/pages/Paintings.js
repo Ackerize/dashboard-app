@@ -17,8 +17,6 @@ const Paintings = () => {
     })
   }, []);
 
-  console.log(paintingsArray);
-
   useEffect(() => {
     if(!paintingsArray) return null;
     let regexInput = new RegExp(filterWord, "gi");

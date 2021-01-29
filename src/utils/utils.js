@@ -44,6 +44,8 @@ export const filterArray = (array) => map(array, (item) => item.value);
 
 export const filterObject = (obj) => obj.value;
 
+export const filterMaterialsArray = (array) => map(array, (item) => item.id)
+
 export const dataDelete = {
   title: "Confirmar para eliminar",
   subtitle: "¿Estás seguro de eliminar este cuadro?",
@@ -190,14 +192,34 @@ export const filterMeasurements = (collection, idMaterial) => {
   return collection.filter((item) => item.material_id == idMaterial);
 };
 
-export const formatArrayMeasurements = (array, materials) =>
-  map(array, (item) => {
+export const formatArrayMeasurements = (array, materials) =>{
+  return map(array, (item) => {
     const materialName = findMaterial(materials, item.material_id);
     return {
       label: `${item.width} x ${item.height} cm -  ${materialName}`,
       value: item.id,
     };
   });
-
+}
 const findMaterial = (materials, idMaterial) =>
   materials.filter((item) => item.value == idMaterial)[0].label;
+
+export const onValidatePairs = (
+  materialsSelected,
+  measurementsSelected,
+  measurements
+) => {
+  const materialsSet = new Set();
+  let flag = true;
+	measurements.forEach((item) => {
+		if(measurementsSelected.includes(item.id) && materialsSelected.includes(item.material_id)){
+			materialsSet.add(item.material_id);
+		}
+		else if(measurementsSelected.includes(item.id) && !materialsSelected.includes(item.material_id)){
+			flag = false;
+		}
+	});
+	if(flag && materialsSet.size !== materialsSelected.length) return false;
+	return flag;
+};
+

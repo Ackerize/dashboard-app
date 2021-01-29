@@ -577,6 +577,10 @@ input[type="radio"] {
   .d-flex.md-form.active-cyan-2 {
     margin-right: -5rem;
   }
+
+  .card-painting{
+    width: 100% !important;
+  }
 }
 
 @media (min-width: 426px) and (max-width: 768px) {

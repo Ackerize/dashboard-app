@@ -4,22 +4,37 @@ import { getAllThemes } from "../api/themes";
 import { getAllMaterials } from "../api/materials";
 import {
   API_HOST,
+  convertIdToSelectedOptions,
   filterArray,
+  filterMaterialsArray,
   filterMeasurements,
   filterObject,
   formatArray,
   formatArrayMeasurements,
   onValidatePairs,
 } from "../utils/utils";
+import axios from "axios";
+
 import SelectForm from "./SelectForm";
 import Upload from "./Upload";
 import { getAllMeasurements } from "../api/measurements";
-import axios from "axios";
 import { storage } from "../firebase/firebase";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CardBody = ({ btnText }) => {
+const EditBody = ({ painting }) => {
+  const {
+    materials: painting_materials,
+    id,
+    name,
+    description,
+    stock,
+    active,
+    image_url,
+    theme,
+    measurements: painting_measurements,
+  } = painting;
+
   const [themes, setThemes] = useState(null);
   const [materials, setMaterials] = useState(null);
   const [selectedMaterial, setSelectedMaterial] = useState([]);
@@ -30,14 +45,13 @@ const CardBody = ({ btnText }) => {
 
   const history = useHistory();
 
-  const { register, handleSubmit, errors, setValue, setError } = useForm();
+  const { register, handleSubmit, errors, setValue } = useForm();
 
   const onSubmitData = (data) => {
-    /*axios.post(`${API_HOST}/paintings`, data)
+    /*axios.put(`${API_HOST}/paintings/${id}`, data)
     .then((response) => {
       console.log(response);
     })*/
-
     const flag = onValidatePairs(
       selectedMaterial,
       selectedMeasurement,
@@ -47,11 +61,15 @@ const CardBody = ({ btnText }) => {
     if (flag) {
       console.log(data);
       Swal.fire({
-        title: "¡Orden actualizada!.",
+        title: "¡Cuadro actualizado!.",
+        text: "Aún no actualiza en realidad :b",
         icon: "success",
         showConfirmButton: false,
         timer: 1200,
       });
+      setTimeout(() => {
+        history.push("/paintings");
+      }, 1500);
     } else {
       Swal.fire({
         title: "¡Oops!",
@@ -67,9 +85,19 @@ const CardBody = ({ btnText }) => {
     register({ name: "materials" }, { required: true });
     register({ name: "measurements" }, { required: true });
     register({ name: "theme_id" }, { required: true });
-    register({ name: "active" }, { required: true });
+    register({ name: "active" });
     register({ name: "image_url" }, { required: true });
-    setValue("active", true);
+  }, []);
+
+  useEffect(() => {
+    const idsMaterials = filterMaterialsArray(painting_materials);
+    const idsMeasurements = filterMaterialsArray(painting_measurements);
+    const idTheme = theme.id;
+    setValue("materials", idsMaterials);
+    setValue("measurements", idsMeasurements);
+    setValue("theme_id", idTheme);
+    setValue("image_url", image_url);
+    setValue("active", active);
   }, []);
 
   useEffect(() => {
@@ -82,22 +110,37 @@ const CardBody = ({ btnText }) => {
     getAllMaterials().then((response) => {
       setMaterials(formatArray(response.materials));
     });
+    setSelectedMaterial(filterMaterialsArray(painting_materials));
   }, []);
+
+  useEffect(() => {
+    if (materials) {
+      const idsMeasurements = formatArrayMeasurements(
+        painting_measurements,
+        materials
+      );
+      setSelectedMeasurement(filterArray(idsMeasurements));
+    }
+  }, [materials]);
 
   useEffect(() => {
     getAllMeasurements().then((response) => {
       setMeasurements(response);
       let resultArray = [];
       for (var i = 0; i < selectedMaterial.length; i++) {
-        let formatMeasurements = formatArrayMeasurements(
-          filterMeasurements(response, selectedMaterial[i]),
-          materials
-        );
-        resultArray = resultArray.concat(formatMeasurements);
+        if (materials) {
+          let formatMeasurements = formatArrayMeasurements(
+            filterMeasurements(response, selectedMaterial[i]),
+            materials
+          );
+          resultArray = resultArray.concat(formatMeasurements);
+        }
       }
       setMeasurementsOptions(resultArray);
     });
-  }, [selectedMaterial]);
+  }, [selectedMaterial, materials]);
+
+  if (!materials || !measurementsOptions) return null;
 
   const handleChange = (selectedOption, type) => {
     if (type === "materials") {
@@ -141,6 +184,7 @@ const CardBody = ({ btnText }) => {
                 ref={register({
                   required: true,
                 })}
+                defaultValue={name}
               />
               {errors.name && (
                 <div className="error">Ingresa el nombre del cuadro</div>
@@ -157,6 +201,7 @@ const CardBody = ({ btnText }) => {
                 type="text"
                 name="description"
                 ref={register({ required: true })}
+                defaultValue={description}
               />
               {errors.description && (
                 <div className="error">Ingresa la descripción del cuadro</div>
@@ -174,6 +219,7 @@ const CardBody = ({ btnText }) => {
                 step="1"
                 min="0"
                 name="stock"
+                defaultValue={stock}
                 ref={register({ required: true, valueAsNumber: true })}
               />
               {errors.stock && (
@@ -193,7 +239,7 @@ const CardBody = ({ btnText }) => {
                 id="inlineRadio1"
                 value="option1"
                 onChange={() => setValue("active", true)}
-                defaultChecked
+                defaultChecked={active}
               />
               <label className="form-check-label" htmlFor="inlineRadio1">
                 Sí
@@ -210,6 +256,7 @@ const CardBody = ({ btnText }) => {
                 id="inlineRadio2"
                 value="option2"
                 onChange={() => setValue("active", false)}
+                defaultChecked={!active}
               />
               <label className="form-check-label" htmlFor="inlineRadio2">
                 No
@@ -227,6 +274,7 @@ const CardBody = ({ btnText }) => {
           error={errors.materials}
           errorMessage="Selecciona el material del cuadro"
           isMulti={true}
+          value={formatArray(painting_materials)}
         />
 
         <SelectForm
@@ -239,6 +287,7 @@ const CardBody = ({ btnText }) => {
           error={errors.measurements}
           errorMessage="Selecciona las medidas del cuadro"
           isMulti={true}
+          value={formatArrayMeasurements(painting_measurements, materials)}
         />
 
         <SelectForm
@@ -251,6 +300,7 @@ const CardBody = ({ btnText }) => {
           error={errors.theme_id}
           errorMessage="Selecciona el tema del cuadro"
           isMulti={false}
+          value={{ label: theme.name, value: theme.id }}
         />
 
         <div className="form-row">
@@ -260,12 +310,13 @@ const CardBody = ({ btnText }) => {
               setValue={setValue}
               setUrlImg={setUrlImg}
               error={errors.image_url}
+              image_url={image_url}
             />
           </div>
         </div>
         <div className="btn-custom-container" id="container-btn">
           <button className="btn btn--radius-2" type="submit" id="btn-submit">
-            {btnText}
+            Editar cuadro
           </button>
           <button
             type="button"
@@ -281,4 +332,4 @@ const CardBody = ({ btnText }) => {
   );
 };
 
-export default CardBody;
+export default EditBody;

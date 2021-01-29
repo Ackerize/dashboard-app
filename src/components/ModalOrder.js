@@ -4,7 +4,7 @@ import "@trendmicro/react-modal/dist/react-modal.css";
 import SelectForm from "./SelectForm";
 import { API_HOST, statuses } from "../utils/utils";
 import axios from "axios";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const ModalOrder = ({ showModal, setShowModal, order }) => {
   const { id, status } = order;
@@ -18,26 +18,35 @@ const ModalOrder = ({ showModal, setShowModal, order }) => {
     axios
       .put(`${API_HOST}/orders/update-order-status/${id}`, requestBody)
       .then((res) => {
-        console.log(res);
+        console.log(res.data.message);
         setShowModal(false);
-        Swal.fire({
-          title: "¡Orden actualizada!.",
-          icon: "success",
-          showConfirmButton: false,
-          timer: 1200
-        })
-        setTimeout(()=>{
-          window.location.reload(false);
-        }, 1300);
+        if (res.data.message === "ERROR") {
+          Swal.fire({
+            title: "¡Oops! Algo ocurrió mal.",
+            icon: "error",
+            showConfirmButton: false,
+            timer: 1200,
+          });
+        } else {
+          Swal.fire({
+            title: "¡Orden actualizada!.",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1200,
+          });
+          setTimeout(() => {
+            window.location.reload(false);
+          }, 1500);
+        }
       })
       .catch((error) => {
         Swal.fire({
           title: "¡Oh no! Ocurrió un error.",
           icon: "error",
           showConfirmButton: false,
-          timer: 1200
-        })
-      })
+          timer: 1200,
+        });
+      });
   };
 
   return (
@@ -55,7 +64,7 @@ const ModalOrder = ({ showModal, setShowModal, order }) => {
             name="status"
             label="Estado"
             error={false}
-            errorMessage="Selecciona el material del cuadro"
+            errorMessage="Selecciona el estado del cuadro"
             className="custom-form-row"
             value={{ value: `${status}`, label: `${status}` }}
           />

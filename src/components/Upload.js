@@ -3,12 +3,20 @@ import { storage } from "../firebase/firebase";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { generateString } from "../utils/utils";
 
-const Upload = ({ setValue, setUrlImg, error }) => {
+const Upload = ({ setValue, setUrlImg, error, image_url }) => {
   const [ready, setReady] = useState(false);
   const [lastImage, setLastImage] = useState("");
   const [progress, setProgress] = useState(0);
   const [url, setUrl] = useState("No URL");
   const [image, setImage] = useState({ name: "No Image" });
+
+  useEffect(() => {
+    if(image_url){
+      setUrl(image_url);
+      setReady(true);
+      setProgress(100);
+    }
+  }, [])
 
   useEffect(() => {
     if (image.name !== "No Image") {

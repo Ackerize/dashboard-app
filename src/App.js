@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Paintings from "./pages/Paintings";
 import FormPaintings from "./containers/FormPaintings";
 import Details from "./containers/Details";
+import FormEdit from "./containers/FormEdit";
 
 export const App = () => {
   return (
@@ -19,6 +20,7 @@ export const App = () => {
           <Route exact path="/history" component={History} />
           <Route exact path="/paintings/form" component={FormPaintings} />
           <Route exact path="/order/view/:id" component={Details} />
+          <Route exact path="/edit/:id" component={FormEdit} />
         </Switch>
       </Router>
     </>
