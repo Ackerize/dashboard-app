@@ -135,6 +135,10 @@ export const formatDate = (date) => {
   return moment(date).format("YYYY-MM-DD");
 };
 
+export const formatDateSearch = (date) => {
+  return moment(date).format("DD/MM/YYYY");
+};
+
 export const progressOrderBar = (status) => {
   switch (status) {
     case "EN PROCESO":

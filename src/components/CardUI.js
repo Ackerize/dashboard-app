@@ -9,7 +9,7 @@ const CardUI = ({ imgSrc, title, option, url, description }) => {
   return (
     <div className="card text-center shadow">
       <div className="overflow">
-        <img src={imgSrc} alt="Image 1" className="card-img-top" />
+        <img src={imgSrc} alt="Foto" className="card-img-top" />
       </div>
       <div className="card-body text-dark">
         <h4 className="card-title">{title}</h4>

@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form";
 import { getAllThemes } from "../api/themes";
 import { getAllMaterials } from "../api/materials";
 import {
-  API_HOST,
-  convertIdToSelectedOptions,
   filterArray,
   filterMaterialsArray,
   filterMeasurements,
@@ -13,7 +11,6 @@ import {
   formatArrayMeasurements,
   onValidatePairs,
 } from "../utils/utils";
-import axios from "axios";
 
 import SelectForm from "./SelectForm";
 import Upload from "./Upload";
@@ -25,7 +22,6 @@ import Swal from "sweetalert2";
 const EditBody = ({ painting }) => {
   const {
     materials: painting_materials,
-    id,
     name,
     description,
     stock,

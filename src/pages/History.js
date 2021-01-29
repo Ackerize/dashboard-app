@@ -3,7 +3,12 @@ import Search from "../components/Search";
 import TableOrders from "../components/TableOrders";
 import DatePicker from "../components/DatePicker";
 import Select from "react-select";
-import { formatDate, sortBy, sortOption } from "../utils/utils";
+import {
+  formatDate,
+  sortBy,
+  sortOption,
+  formatDateSearch,
+} from "../utils/utils";
 import { getAllOrders } from "../api/orders";
 import moment from "moment";
 
@@ -47,7 +52,8 @@ const History = () => {
         order.customer_name.match(regexInput) ||
         order.delivery_zone.name.match(regexInput) ||
         order.status.match(regexInput) ||
-        order.id.toString().match(regexInput)
+        order.id.toString().match(regexInput) ||
+        formatDateSearch(order.order_date).match(regexInput)
       );
     });
     setResultingOrders(ordersFilter);

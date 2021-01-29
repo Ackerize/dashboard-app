@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { getAllThemes } from "../api/themes";
 import { getAllMaterials } from "../api/materials";
 import {
-  API_HOST,
   filterArray,
   filterMeasurements,
   filterObject,
@@ -14,7 +13,6 @@ import {
 import SelectForm from "./SelectForm";
 import Upload from "./Upload";
 import { getAllMeasurements } from "../api/measurements";
-import axios from "axios";
 import { storage } from "../firebase/firebase";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -30,7 +28,7 @@ const CardBody = ({ btnText }) => {
 
   const history = useHistory();
 
-  const { register, handleSubmit, errors, setValue, setError } = useForm();
+  const { register, handleSubmit, errors, setValue } = useForm();
 
   const onSubmitData = (data) => {
     /*axios.post(`${API_HOST}/paintings`, data)
