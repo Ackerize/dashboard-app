@@ -1,5 +1,6 @@
 import React from 'react';
 import * as AiIcons from "react-icons/ai";
+import * as FaIcons from "react-icons/fa";
 
 export const SidebarData = [
     {
@@ -12,6 +13,30 @@ export const SidebarData = [
         title: 'Cuadros',
         path: '/paintings',
         icon: <AiIcons.AiFillPicture />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Medidas',
+        path: '/measurements',
+        icon: <FaIcons.FaRulerCombined />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Materiales',
+        path: '/materials',
+        icon: <FaIcons.FaSwatchbook />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Temas',
+        path: '/themes',
+        icon: <FaIcons.FaPalette />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Zonas de entrega',
+        path: '/delivery-zones',
+        icon: <FaIcons.FaTruck />,
         cName: 'nav-text'
     },
     {
