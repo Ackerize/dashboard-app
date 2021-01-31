@@ -12,6 +12,7 @@ import Materials from "./pages/Materials";
 import Themes from "./pages/Themes";
 import Measurements from "./pages/Measurements";
 import DeliveryZones from "./pages/DeliveryZones";
+import MaterialForm from "./containers/MaterialForm";
 
 export const App = () => {
   return (
@@ -26,6 +27,8 @@ export const App = () => {
           <Route exact path="/order/view/:id" component={Details} />
           <Route exact path="/paintings/edit/:id" component={FormEdit} />
           <Route exact path="/materials" component={Materials} />
+          <Route exact path="/materials/new" component={MaterialForm} />
+          <Route exact path="/materials/edit" component={MaterialForm} />
           <Route exact path="/themes" component={Themes} />
           <Route exact path="/measurements" component={Measurements} />
           <Route exact path="/delivery-zones" component={DeliveryZones} />

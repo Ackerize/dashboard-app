@@ -487,6 +487,14 @@ input[type="radio"] {
   outline: solid #f00 1px !important;
 }*/
 
+.table.table-materials {
+  width: 60% !important;
+}
+
+.font.tbody-materials {
+  font-size: 20px;
+}
+
 @media (min-width: 1950px) and (max-width: 2560px) {
   .header-order-table .nice-dates {
     margin-left: 6.5rem !important;

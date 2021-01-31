@@ -34,6 +34,13 @@ const Button = ({ type, onClick }) => {
           <p className="btn-text">Agregar</p>
         </button>
       );
+    case "new":
+      return (
+        <button type="button" className="btn btn-add" onClick={onClick}>
+          <IoIcon.IoMdAdd style={{ marginTop: 5, fontSize: 22 }} />
+          <p className="btn-text">Nuevo</p>
+        </button>
+      );
     case "view":
       return (
         <button type="button" className="btn btn-container btn-view" onClick={onClick}>

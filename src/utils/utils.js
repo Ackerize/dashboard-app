@@ -23,6 +23,13 @@ export const cabecerasOrders = [
   "Opciones",
 ];
 
+export const cabecerasMaterials = [
+  "Id",
+  "Nombre",
+  "Disponible",
+  "Opciones",
+]
+
 export const API_HOST = "https://api-rest-canvas.herokuapp.com/api";
 
 const characters =
