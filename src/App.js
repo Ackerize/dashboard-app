@@ -8,6 +8,10 @@ import Paintings from "./pages/Paintings";
 import FormPaintings from "./containers/FormPaintings";
 import Details from "./containers/Details";
 import FormEdit from "./containers/FormEdit";
+import Materials from "./pages/Materials";
+import Themes from "./pages/Themes";
+import Measurements from "./pages/Measurements";
+import DeliveryZones from "./pages/DeliveryZones";
 
 export const App = () => {
   return (
@@ -18,9 +22,13 @@ export const App = () => {
           <Route path="/" exact component={Home} />
           <Route exact path="/paintings" component={Paintings} />
           <Route exact path="/history" component={History} />
-          <Route exact path="/paintings/form" component={FormPaintings} />
+          <Route exact path="/paintings/new" component={FormPaintings} />
           <Route exact path="/order/view/:id" component={Details} />
-          <Route exact path="/edit/:id" component={FormEdit} />
+          <Route exact path="/paintings/edit/:id" component={FormEdit} />
+          <Route exact path="/materials" component={Materials} />
+          <Route exact path="/themes" component={Themes} />
+          <Route exact path="/measurements" component={Measurements} />
+          <Route exact path="/delivery-zones" component={DeliveryZones} />
         </Switch>
       </Router>
     </>

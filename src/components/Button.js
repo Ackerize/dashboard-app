@@ -10,7 +10,7 @@ import { dataDelete } from "../utils/utils";
 
 const Button = ({ type, onClick }) => {
   const history = useHistory();
-  const handleClick = () => history.push('/paintings/form');
+  const handleClick = () => history.push('/paintings/new');
 
   switch (type) {
     case "edit":

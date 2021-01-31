@@ -12,7 +12,7 @@ const RowPaintings = ({ painting }) => {
   let history = useHistory();
 
   const onEdit = () => {
-    history.push(`/edit/${id}`);
+    history.push(`/paintings/edit/${id}`);
   }
 
   const onDelete = () => {
