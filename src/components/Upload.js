@@ -115,7 +115,7 @@ const Upload = ({ setValue, setUrlImg, error, image_url }) => {
         margin="20px auto 10px auto"
         labelAlignment="right"
       />
-      {error && <div className="error-img">Seleccione la imagen del cuadro</div>}
+      {error && <div className="error-img">Seleccione una imagen</div>}
     </div>
   );
 };

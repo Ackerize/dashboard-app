@@ -491,6 +491,10 @@ input[type="radio"] {
   width: 60% !important;
 }
 
+.table.table-zones{
+  width: 60% !important;
+}
+
 .font.tbody-materials {
   font-size: 20px;
 }

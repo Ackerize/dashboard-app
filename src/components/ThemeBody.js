@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import { storage } from "../firebase/firebase";
+import Upload from "./Upload";
 
-const MaterialBody = ({ btnText }) => {
+const ThemeBody = ({ btnText }) => {
   const history = useHistory();
-  let id, name, active = true, textBtn = btnText;
+  let id, name, active = true, image_url, textBtn = btnText;
+  const [url, setUrl] = useState(null);
 
-  const material = JSON.parse(localStorage.getItem('actualMaterial'));
-  console.log(material);
+  const theme = JSON.parse(localStorage.getItem('actualTheme'));
+  console.log(theme);
 
-  if(material){
-    id = material.id;
-    name = material.name;
-    active = material.active;
-    textBtn = "Actualizar material"
+  if(theme){
+    id = theme.id;
+    name = theme.name;
+    active = theme.active;
+    image_url = theme.image_url;
+    textBtn = "Actualizar tema";
   }
 
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -23,14 +27,29 @@ const MaterialBody = ({ btnText }) => {
   }
 
   const onCancel = () => {
-    localStorage.removeItem('actualMaterial');
-    history.push('/materials');
+    if (url) {
+      storage
+        .ref("/")
+        .child(url)
+        .delete()
+        .then(() => {
+          localStorage.removeItem('actualTheme');
+          history.push("/themes")
+        })
+        .catch(() => console.log("Error"));
+    } else {
+      localStorage.removeItem('actualTheme');
+      history.push("/themes");
+    }
   }
 
   useEffect(() => {
     register({ name: "name" }, { required: true });
-    if(active)
+    register({ name: "image_url" }, { required: true });
+    if(active){
       register({ name: "active" });
+      setValue('active', active);
+    }
     else register({name: "active"}, {required: true});
   }, []);
 
@@ -51,7 +70,7 @@ const MaterialBody = ({ btnText }) => {
                 defaultValue={name}
               />
               {errors.name && (
-                <div className="error">Ingresa el nombre del material</div>
+                <div className="error">Ingresa el nombre del tema</div>
               )}
             </div>
           </div>
@@ -92,6 +111,17 @@ const MaterialBody = ({ btnText }) => {
             </div>
           </div>
         </div>
+        <div className="form-row">
+          <div className="name">Foto</div>
+          <div className="value">
+            <Upload
+              setValue={setValue}
+              setUrlImg={setUrl}
+              error={errors.image_url}
+              image_url={image_url}
+            />
+          </div>
+        </div>
         <div className="btn-custom-container" id="container-btn">
           <button className="btn btn--radius-2" type="submit" id="btn-submit">
             {textBtn}
@@ -110,4 +140,4 @@ const MaterialBody = ({ btnText }) => {
   );
 }
 
-export default MaterialBody
+export default ThemeBody

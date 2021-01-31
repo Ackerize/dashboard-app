@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 
-const MaterialBody = ({ btnText }) => {
+const ZoneBody = ({ btnText }) => {
   const history = useHistory();
-  let id, name, active = true, textBtn = btnText;
+  let id, name, active = true, delivery_cost, textBtn = btnText;
 
-  const material = JSON.parse(localStorage.getItem('actualMaterial'));
-  console.log(material);
+  const zone = JSON.parse(localStorage.getItem('actualZone'));
+  console.log(zone);
 
-  if(material){
-    id = material.id;
-    name = material.name;
-    active = material.active;
-    textBtn = "Actualizar material"
+  if(zone){
+    id = zone.id;
+    name = zone.name;
+    active = zone.active;
+    delivery_cost = zone.delivery_cost;
   }
 
   const { register, handleSubmit, errors, setValue } = useForm();
@@ -23,14 +23,16 @@ const MaterialBody = ({ btnText }) => {
   }
 
   const onCancel = () => {
-    localStorage.removeItem('actualMaterial');
-    history.push('/materials');
+    history.push('/delivery-zones');
   }
 
   useEffect(() => {
     register({ name: "name" }, { required: true });
-    if(active)
+    register({ name: "delivery_cost" }, { required: true });
+    if(active){
       register({ name: "active" });
+      setValue('active', active);
+    }
     else register({name: "active"}, {required: true});
   }, []);
 
@@ -51,7 +53,26 @@ const MaterialBody = ({ btnText }) => {
                 defaultValue={name}
               />
               {errors.name && (
-                <div className="error">Ingresa el nombre del material</div>
+                <div className="error">Ingresa el nombre de la zona</div>
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="name">Precio: </div>
+          <div className="value">
+            <div className="input-group">
+              <input
+                className="input--style-5"
+                type="text"
+                name="delivery_cost"
+                ref={register({
+                  required: true,
+                })}
+                defaultValue={delivery_cost}
+              />
+              {errors.delivery_cost && (
+                <div className="error">Ingresa el precio</div>
               )}
             </div>
           </div>
@@ -110,4 +131,4 @@ const MaterialBody = ({ btnText }) => {
   );
 }
 
-export default MaterialBody
+export default ZoneBody

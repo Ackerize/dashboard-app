@@ -20,7 +20,6 @@ const TableMaterials = ({ materialsArray }) => {
             ))}
         </tbody>
       </table>
-      
     </div>
   )
 }

@@ -30,6 +30,32 @@ export const cabecerasMaterials = [
   "Opciones",
 ]
 
+export const cabecerasThemes = [
+  "Id",
+  "Imagen",
+  "Nombre",
+  "Disponible",
+  "Opciones",
+]
+
+export const cabecerasZones = [
+  "Id",
+  "Nombre",
+  "Precio",
+  "Disponible",
+  "Opciones",
+]
+
+export const cabecerasMeasurements = [
+  "Id",
+  "Ancho",
+  "Alto",
+  "Precio",
+  "Material",
+  "Disponible",
+  "Opciones",
+]
+
 export const API_HOST = "https://api-rest-canvas.herokuapp.com/api";
 
 const characters =
@@ -212,8 +238,12 @@ export const formatArrayMeasurements = (array, materials) =>{
     };
   });
 }
-const findMaterial = (materials, idMaterial) =>
+export const findMaterial = (materials, idMaterial) =>
   materials.filter((item) => item.value == idMaterial)[0].label;
+
+export const findMaterialById = (materials, idMaterial) => 
+  materials.filter((item) => item.id === idMaterial)[0].name;
+
 
 export const onValidatePairs = (
   materialsSelected,
