@@ -1,37 +1,97 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { API_HOST } from "./../utils/utils";
+import Swal from "sweetalert2";
 
 const MaterialBody = ({ btnText }) => {
   const history = useHistory();
-  let id, name, active = true, textBtn = btnText;
+  let id,
+    name,
+    active = true,
+    textBtn = btnText;
+  const material = JSON.parse(localStorage.getItem("actualMaterial"));
 
-  const material = JSON.parse(localStorage.getItem('actualMaterial'));
-  console.log(material);
-
-  if(material){
+  if (material) {
     id = material.id;
     name = material.name;
     active = material.active;
-    textBtn = "Actualizar material"
+    textBtn = "Actualizar material";
   }
 
   const { register, handleSubmit, errors, setValue } = useForm();
 
   const onSubmitData = (data) => {
     console.log(data);
-  }
+    if (material) {
+      axios
+        .put(`${API_HOST}/materials/${id}`, data)
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+          Swal.fire({
+            title: "¡Material actualizado!",
+            text: "Has actualizado un material exitosamente",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1400,
+          });
+          setTimeout(() => {
+            history.push('/materials')
+          }, 1500);
+        })
+        .catch((err) => {
+          Swal.fire({
+            title: "¡Oops!",
+            text: "Ocurrió un error",
+            icon: "error",
+          });
+          console.log(err);
+        });
+    } else {
+      console.log('ENTRÉ - POST')
+      axios
+        .post(`${API_HOST}/materials`,  data )
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+          Swal.fire({
+            title: "¡Material creado!",
+            text: "Has creado un material exitosamente",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1400,
+          });
+          setTimeout(() => {
+            history.push('/materials')
+          }, 1500);
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            title: "¡Oops!",
+            text: "Ocurrió un error",
+            icon: "error",
+          });
+        });
+    }
+  };
 
   const onCancel = () => {
-    localStorage.removeItem('actualMaterial');
-    history.push('/materials');
-  }
+    localStorage.removeItem("actualMaterial");
+    history.push("/materials");
+  };
 
   useEffect(() => {
     register({ name: "name" }, { required: true });
-    if(active)
+    if (active) {
       register({ name: "active" });
-    else register({name: "active"}, {required: true});
+      setValue("active", active);
+    } else {
+      register({ name: "active" }, { required: true });
+      setValue("active", true);
+    }
   }, []);
 
   return (
@@ -108,6 +168,6 @@ const MaterialBody = ({ btnText }) => {
       </form>
     </div>
   );
-}
+};
 
-export default MaterialBody
+export default MaterialBody;

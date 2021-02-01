@@ -1,6 +1,9 @@
 import React from 'react'
 import Button from './Button';
 import { useHistory } from "react-router-dom";
+import axios from 'axios';
+import { API_HOST } from '../utils/utils';
+import Swal from 'sweetalert2';
 
 const RowMaterials = ({ material }) => {
   const {id, name, active} = material;
@@ -14,6 +17,21 @@ const RowMaterials = ({ material }) => {
 
   const onDelete = () => {
     console.log("BORRAR MATERIAL");
+    axios.delete(`${API_HOST}/materials/${id}`)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+      Swal.fire({
+        title: "¡Material borrado!",
+        text: "Has borrado un material exitosamente",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1400,
+      });
+      setTimeout(() => {
+        window.location.reload(false);
+      }, 1500);
+    })
   }
 
   return (
