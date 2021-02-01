@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { getAllMaterials } from "../api/materials";
-import { findMaterial, formatArray } from "../utils/utils";
+import { API_HOST, findMaterial, formatArray } from "../utils/utils";
 import SelectForm from "./SelectForm";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const BodyMeasurement = ({ btnText }) => {
   const [materials, setMaterials] = useState(null);
@@ -11,7 +13,6 @@ const BodyMeasurement = ({ btnText }) => {
   let id, height, width, active = true, price, material_id, material_name, textBtn = btnText;
 
   const measurement = JSON.parse(localStorage.getItem('actualMeasurement'));
-  console.log(measurement);
 
   if(measurement){
     id = measurement.id;
@@ -26,6 +27,57 @@ const BodyMeasurement = ({ btnText }) => {
 
   const onSubmitData = (data) => {
     console.log(data);
+    if (measurement) {
+      axios
+        .put(`${API_HOST}/measurements/${id}`, data)
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+          Swal.fire({
+            title: "¡Medidas actualizada!",
+            text: "Has actualizado las medidas exitosamente",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1400,
+          });
+          setTimeout(() => {
+            history.push('/measurements')
+          }, 1500);
+        })
+        .catch((err) => {
+          Swal.fire({
+            title: "¡Oops!",
+            text: "Ocurrió un error",
+            icon: "error",
+          });
+          console.log(err);
+        });
+    } else {
+      axios
+        .post(`${API_HOST}/measurements`,  data )
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+          Swal.fire({
+            title: "¡Medidas creado!",
+            text: "Has creado las medidas exitosamente",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1400,
+          });
+          setTimeout(() => {
+            history.push('/measurements')
+          }, 1500);
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            title: "¡Oops!",
+            text: "Ocurrió un error",
+            icon: "error",
+          });
+        });
+    }
   }
 
   const onCancel = () => {
@@ -43,7 +95,13 @@ const BodyMeasurement = ({ btnText }) => {
     register({ name: "height" }, { required: true });
     register({ name: "width" }, { required: true });
     register({ name: "price" }, { required: true });
-    register({ name: "material_id" }, { required: true });
+    if(material_id){
+      register({ name: "material_id" }, { required: true });
+      setValue('material_id', material_id);
+    }else{
+      register({ name: "material_id" }, { required: true });
+    }
+    
     if(active){
       register({ name: "active" });
       setValue('active', active);
@@ -54,7 +112,9 @@ const BodyMeasurement = ({ btnText }) => {
   if(!materials) return null;
 
   console.log(materials)
-  material_name = findMaterial(materials, material_id)
+  if(material_id){
+    material_name = findMaterial(materials, material_id)
+  }
 
   const handleChange = (selectedOption) => {
     setValue('material_id', selectedOption.value);
@@ -166,7 +226,7 @@ const BodyMeasurement = ({ btnText }) => {
           error={errors.material_id}
           errorMessage="Selecciona un material"
           isMulti={false}
-          value={{ label: material_name, value: material_id}}
+          value={material_id && { label: material_name, value: material_id}}
         />
         <div className="btn-custom-container" id="container-btn">
           <button className="btn btn--radius-2" type="submit" id="btn-submit">

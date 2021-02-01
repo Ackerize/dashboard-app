@@ -1,7 +1,9 @@
+import axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { getAllMaterials } from '../api/materials';
-import { findMaterialById } from '../utils/utils';
+import { API_HOST, findMaterialById } from '../utils/utils';
 import Button from './Button';
 
 const RowMeasurements = ({ measurement, materialsArray }) => {
@@ -9,13 +11,26 @@ const RowMeasurements = ({ measurement, materialsArray }) => {
   const history = useHistory();
 
   const onEdit = () => {
-    console.log("EDITAR MEDIDAS");
     localStorage.setItem('actualMeasurement', JSON.stringify(measurement));
-    history.push('measurements/edit');
+    history.push('/measurements/edit');
   }
 
   const onDelete = () => {
-    console.log("BORRAR MEDIDAS");
+    axios.delete(`${API_HOST}/measurements/${id}`)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+      Swal.fire({
+        title: "¡Medidas borradas!",
+        text: "Has borrado las medidas exitosamente",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1400,
+      });
+      setTimeout(() => {
+        window.location.reload(false);
+      }, 1500);
+    })
   }
 
   const material_name = findMaterialById(materialsArray, material_id);

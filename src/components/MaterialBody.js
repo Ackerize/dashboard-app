@@ -50,7 +50,6 @@ const MaterialBody = ({ btnText }) => {
           console.log(err);
         });
     } else {
-      console.log('ENTRÉ - POST')
       axios
         .post(`${API_HOST}/materials`,  data )
         .then((res) => {

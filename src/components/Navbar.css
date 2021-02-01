@@ -503,6 +503,22 @@ input[type="radio"] {
   font-size: 20px;
 }
 
+@media (min-width: 860px) and (max-width: 1024px){
+  .header-container{
+    justify-content: space-between !important;
+  }
+  .d-flex.md-form.active-cyan-2{
+    margin-right: 1.5rem !important;
+    width: fit-content;
+  }
+  .active-cyan-2 input.form-control[type="text"]{
+    width: 100% !important;
+  }
+  .active-cyan-2 input.form-control[type="text"]:focus:not([readonly]){
+    width: 100% !important;
+  }
+}
+
 @media (min-width: 1950px) and (max-width: 2560px) {
   .header-order-table .nice-dates {
     margin-left: 6.5rem !important;
@@ -586,7 +602,7 @@ input[type="radio"] {
     width: 80% !important;
     margin-right: 0 !important;
   }
-  .table {
+  .table, .table.table-zones {
     width: 85% !important;
   }
 

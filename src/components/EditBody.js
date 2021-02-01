@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 import { getAllThemes } from "../api/themes";
 import { getAllMaterials } from "../api/materials";
 import {
+  API_HOST,
   filterArray,
   filterMaterialsArray,
   filterMeasurements,
   filterObject,
   formatArray,
   formatArrayMeasurements,
+  onDeleteItems,
   onValidatePairs,
 } from "../utils/utils";
 
@@ -18,6 +20,7 @@ import { getAllMeasurements } from "../api/measurements";
 import { storage } from "../firebase/firebase";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const EditBody = ({ painting }) => {
   const {
@@ -28,6 +31,7 @@ const EditBody = ({ painting }) => {
     active,
     image_url,
     theme,
+    id,
     measurements: painting_measurements,
   } = painting;
 
@@ -36,46 +40,14 @@ const EditBody = ({ painting }) => {
   const [selectedMaterial, setSelectedMaterial] = useState([]);
   const [selectedMeasurement, setSelectedMeasurement] = useState([]);
   const [measurementsOptions, setMeasurementsOptions] = useState([]);
+  const [initialMaterials, setInitialMaterials] = useState([]);
+  const [initialMeasurements, setInitialMeasurements] = useState([]);
   const [urlImg, setUrlImg] = useState(null);
   const [measurements, setMeasurements] = useState([]);
 
   const history = useHistory();
 
   const { register, handleSubmit, errors, setValue } = useForm();
-
-  const onSubmitData = (data) => {
-    /*axios.put(`${API_HOST}/paintings/${id}`, data)
-    .then((response) => {
-      console.log(response);
-    })*/
-    const flag = onValidatePairs(
-      selectedMaterial,
-      selectedMeasurement,
-      measurements
-    );
-
-    if (flag) {
-      console.log(data);
-      Swal.fire({
-        title: "¡Cuadro actualizado!.",
-        text: "Aún no actualiza en realidad :b",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      setTimeout(() => {
-        history.push("/paintings");
-      }, 1500);
-    } else {
-      Swal.fire({
-        title: "¡Oops!",
-        text:
-          "Revisa que tus medidas coincidan con los materiales seleccionados",
-        icon: "warning",
-      });
-      console.log("TODO MAL");
-    }
-  };
 
   useEffect(() => {
     register({ name: "materials" }, { required: true });
@@ -88,6 +60,8 @@ const EditBody = ({ painting }) => {
   useEffect(() => {
     const idsMaterials = filterMaterialsArray(painting_materials);
     const idsMeasurements = filterMaterialsArray(painting_measurements);
+    setInitialMaterials(idsMaterials);
+    setInitialMeasurements(idsMeasurements);
     const idTheme = theme.id;
     setValue("materials", idsMaterials);
     setValue("measurements", idsMeasurements);
@@ -95,6 +69,67 @@ const EditBody = ({ painting }) => {
     setValue("image_url", image_url);
     setValue("active", active);
   }, []);
+
+  const onSubmitData = (data) => {
+    const flag = onValidatePairs(
+      selectedMaterial,
+      selectedMeasurement,
+      measurements
+    );
+
+    if (flag) {
+      console.log(data);
+      const deleteMaterials = onDeleteItems(initialMaterials, data.materials);
+      const deleteMeasurements = onDeleteItems(
+        initialMeasurements,
+        data.measurements
+      );
+      console.log(deleteMaterials);
+      console.log(deleteMeasurements);
+      const bodyMaterials = {
+        materials: deleteMaterials,
+      };
+      const bodyMeasurements = {
+        measurements: deleteMeasurements,
+      };
+
+      axios
+        .put(`${API_HOST}/paintings/${id}`, data)
+        .then((response) => {
+          console.log(response.data);
+          return axios.delete(`${API_HOST}/paintings/materials/${id}`, {
+            data: bodyMaterials,
+          });
+        })
+        .then((response) => {
+          console.log(response.data);
+          return axios.delete(`${API_HOST}/paintings/measurements/${id}`, {
+            data: bodyMeasurements,
+          });
+        })
+        .then((response) => {
+          console.log(response.data);
+          Swal.fire({
+            title: "¡Cuadro actualizado!",
+            text: "Has actualizado un cuadro exitosamente",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setTimeout(() => {
+            history.push("/paintings");
+          }, 1500);
+        });
+    } else {
+      Swal.fire({
+        title: "¡Oops!",
+        text:
+          "Revisa que tus medidas coincidan con los materiales seleccionados",
+        icon: "warning",
+      });
+      console.log("TODO MAL");
+    }
+  };
 
   useEffect(() => {
     getAllThemes().then((response) => {

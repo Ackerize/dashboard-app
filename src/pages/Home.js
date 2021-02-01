@@ -3,13 +3,17 @@ import CardUI from "../components/CardUI";
 
 import historyImage from "../assets/history.jpg";
 import paintingImage from "../assets/painting.jpg";
+import measurementsImage from '../assets/measurement.jpg'
+import materialImage from '../assets/material.jpg';
+import themeImage from '../assets/theme.jpg';
+import deliveryImage from '../assets/delivery.jpg';
 
 const Home = () => {
   return (
     <>
       <h1 className="text-center text-uppercase mt-4 mb-3">Home</h1>
       <div className="container-fluid d-flex justify-content-center">
-        <div className="row">
+        <div className="row row-home-cards">
           <div className="col-md-4">
             <CardUI
               imgSrc={paintingImage}
@@ -21,7 +25,7 @@ const Home = () => {
           </div>
           <div className="col-md-4">
             <CardUI
-              imgSrc={historyImage}
+              imgSrc={measurementsImage}
               title="Medidas"
               option="Medidas"
               url="measurements"
@@ -30,7 +34,7 @@ const Home = () => {
           </div>
           <div className="col-md-4">
             <CardUI
-              imgSrc={paintingImage}
+              imgSrc={materialImage}
               title="Materiales"
               option="Materiales"
               url="materials"
@@ -38,10 +42,10 @@ const Home = () => {
             />
           </div>
         </div>
-        <div className="row">
+        <div className="row row-home-cards">
           <div className="col-md-4">
             <CardUI
-              imgSrc={paintingImage}
+              imgSrc={themeImage}
               title="Temas"
               option="Temas"
               url="themes"
@@ -50,7 +54,7 @@ const Home = () => {
           </div>
           <div className="col-md-4">
             <CardUI
-              imgSrc={historyImage}
+              imgSrc={deliveryImage}
               title="Zonas de entrega"
               option="Zonas"
               url="delivery-zones"

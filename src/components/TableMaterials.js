@@ -5,7 +5,7 @@ import RowMaterials from './RowMaterials'
 
 const TableMaterials = ({ materialsArray }) => {
   return (
-    <div className="table-responsive">
+    <div className="table-paintings table-responsive">
       <table className="table table-materials">
         <thead className="table-light text-center">
           <tr>

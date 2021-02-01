@@ -13,6 +13,7 @@ const Upload = ({ setValue, setUrlImg, error, image_url }) => {
   useEffect(() => {
     if(image_url){
       setUrl(image_url);
+      setValue('image_url', image_url);
       setReady(true);
       setProgress(100);
     }
@@ -86,6 +87,7 @@ const Upload = ({ setValue, setUrlImg, error, image_url }) => {
               backgroundImage: `url(${url})`,
               imageResolution: "from-image",
             }}
+            type="button"
             id="btn-upload"
           >
             <label htmlFor="img" className="img-label">
@@ -101,7 +103,7 @@ const Upload = ({ setValue, setUrlImg, error, image_url }) => {
             id="img"
             onChange={handleChange}
           />
-          <button className="img-add" id="btn-add">
+          <button className="img-add" id="btn-add" type="button">
             <label htmlFor="img" className="img-label">
               +
             </label>

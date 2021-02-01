@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { BiWindows } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import { API_HOST } from "../utils/utils";
@@ -16,17 +17,20 @@ const RowPaintings = ({ painting }) => {
   }
 
   const onDelete = () => {
-    /*axios.delete(`${API_HOST}/paintings/${id}`)
-    .then((response) => {
+    axios.delete(`${API_HOST}/paintings/${id}`)
+    .then((res) => {
       console.log(res);
       console.log(res.data);
-    })*/
-    Swal.fire({
-      title: "¡Cuadro eliminado!.",
-      text: "Aún no elimina, falta la validación",
-      icon: "success",
-      showConfirmButton: false,
-      timer: 1500,
+      Swal.fire({
+        title: "¡Cuadro eliminado!.",
+        text: "'Has eliminado correctamente el cuadro'",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setTimeout(() => {
+       window.location.reload(false);
+      }, 1500);
     });
   }
 

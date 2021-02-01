@@ -5,7 +5,7 @@ import RowTheme from './RowTheme'
 
 const TableThemes = ({ themesArray }) => {
   return (
-    <div className="table-responsive">
+    <div className="table-paintings table-responsive">
       <table className="table table-theme">
         <thead className="table-light text-center">
           <tr>

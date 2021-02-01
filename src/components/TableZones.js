@@ -5,7 +5,7 @@ import RowZone from './RowZone'
 
 const TableZones = ({ zonesArray }) => {
   return (
-    <div className="table-responsive">
+    <div className="table-paintings table-responsive">
       <table className="table table-zones">
         <thead className="table-light text-center">
           <tr>

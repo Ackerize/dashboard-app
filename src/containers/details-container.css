@@ -96,6 +96,16 @@
   }
 }
 
+@media (min-width: 860px) and (max-width: 1024px) {
+  .row.container-labels.delivery{
+    padding-left: 7% !important;
+    padding-right: 7% !important;
+  }
+  .row.d-flex.icon-content.icon-container{
+    flex-direction: column;
+  }
+}
+
 @media (min-width: 426px) and (max-width: 768px) {
   .card-container-delivery {
     margin: 0 auto;

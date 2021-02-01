@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { getAllThemes } from "../api/themes";
 import { getAllMaterials } from "../api/materials";
 import {
+  API_HOST,
   filterArray,
   filterMeasurements,
   filterObject,
@@ -16,6 +17,7 @@ import { getAllMeasurements } from "../api/measurements";
 import { storage } from "../firebase/firebase";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const CardBody = ({ btnText }) => {
   const [themes, setThemes] = useState(null);
@@ -31,10 +33,6 @@ const CardBody = ({ btnText }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
 
   const onSubmitData = (data) => {
-    /*axios.post(`${API_HOST}/paintings`, data)
-    .then((response) => {
-      console.log(response);
-    })*/
 
     const flag = onValidatePairs(
       selectedMaterial,
@@ -44,13 +42,20 @@ const CardBody = ({ btnText }) => {
 
     if (flag) {
       console.log(data);
-      Swal.fire({
-        title: "¡Cuadro creado!.",
-        text: "Aún no crea en realidad :b",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1500,
+      axios.post(`${API_HOST}/paintings`, data).then((response) => {
+        console.log(response);
+        Swal.fire({
+          title: "¡Cuadro creado!.",
+          text: "Has creado un cuadro exitosamente",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setTimeout(() => {
+          history.push("/paintings");
+        }, 1500);
       });
+      
     } else {
       Swal.fire({
         title: "¡Oops!",

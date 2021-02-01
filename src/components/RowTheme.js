@@ -1,5 +1,8 @@
+import axios from 'axios';
 import React from 'react'
 import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { API_HOST } from '../utils/utils';
 import Button from './Button';
 
 const RowTheme = ({ theme }) => {
@@ -13,7 +16,22 @@ const RowTheme = ({ theme }) => {
   }
   
   const onDelete = () => {
-    console.log("BORRAR MATERIAL");
+    console.log("BORRAR TEMA");
+    axios.delete(`${API_HOST}/themes/${id}`)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+      Swal.fire({
+        title: "¡Tema borrado!",
+        text: "Has borrado un tema exitosamente",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1400,
+      });
+      setTimeout(() => {
+        window.location.reload(false);
+      }, 1500);
+    })
   }
 
   return (

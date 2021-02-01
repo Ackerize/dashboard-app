@@ -23,12 +23,7 @@ export const cabecerasOrders = [
   "Opciones",
 ];
 
-export const cabecerasMaterials = [
-  "Id",
-  "Nombre",
-  "Disponible",
-  "Opciones",
-]
+export const cabecerasMaterials = ["Id", "Nombre", "Disponible", "Opciones"];
 
 export const cabecerasThemes = [
   "Id",
@@ -36,7 +31,7 @@ export const cabecerasThemes = [
   "Nombre",
   "Disponible",
   "Opciones",
-]
+];
 
 export const cabecerasZones = [
   "Id",
@@ -44,7 +39,7 @@ export const cabecerasZones = [
   "Precio",
   "Disponible",
   "Opciones",
-]
+];
 
 export const cabecerasMeasurements = [
   "Id",
@@ -54,7 +49,7 @@ export const cabecerasMeasurements = [
   "Material",
   "Disponible",
   "Opciones",
-]
+];
 
 export const API_HOST = "https://api-rest-canvas.herokuapp.com/api";
 
@@ -77,7 +72,7 @@ export const filterArray = (array) => map(array, (item) => item.value);
 
 export const filterObject = (obj) => obj.value;
 
-export const filterMaterialsArray = (array) => map(array, (item) => item.id)
+export const filterMaterialsArray = (array) => map(array, (item) => item.id);
 
 export const dataDelete = {
   title: "Confirmar para eliminar",
@@ -229,7 +224,7 @@ export const filterMeasurements = (collection, idMaterial) => {
   return collection.filter((item) => item.material_id == idMaterial);
 };
 
-export const formatArrayMeasurements = (array, materials) =>{
+export const formatArrayMeasurements = (array, materials) => {
   return map(array, (item) => {
     const materialName = findMaterial(materials, item.material_id);
     return {
@@ -237,13 +232,12 @@ export const formatArrayMeasurements = (array, materials) =>{
       value: item.id,
     };
   });
-}
+};
 export const findMaterial = (materials, idMaterial) =>
   materials.filter((item) => item.value == idMaterial)[0].label;
 
-export const findMaterialById = (materials, idMaterial) => 
+export const findMaterialById = (materials, idMaterial) =>
   materials.filter((item) => item.id === idMaterial)[0].name;
-
 
 export const onValidatePairs = (
   materialsSelected,
@@ -252,15 +246,29 @@ export const onValidatePairs = (
 ) => {
   const materialsSet = new Set();
   let flag = true;
-	measurements.forEach((item) => {
-		if(measurementsSelected.includes(item.id) && materialsSelected.includes(item.material_id)){
-			materialsSet.add(item.material_id);
-		}
-		else if(measurementsSelected.includes(item.id) && !materialsSelected.includes(item.material_id)){
-			flag = false;
-		}
-	});
-	if(flag && materialsSet.size !== materialsSelected.length) return false;
-	return flag;
+  measurements.forEach((item) => {
+    if (
+      measurementsSelected.includes(item.id) &&
+      materialsSelected.includes(item.material_id)
+    ) {
+      materialsSet.add(item.material_id);
+    } else if (
+      measurementsSelected.includes(item.id) &&
+      !materialsSelected.includes(item.material_id)
+    ) {
+      flag = false;
+    }
+  });
+  if (flag && materialsSet.size !== materialsSelected.length) return false;
+  return flag;
 };
 
+export const onDeleteItems = (initialArray, finalArray) => {
+  let response = [];
+  initialArray.forEach((item) => {
+    if (!finalArray.includes(item)) {
+      response.push(item);
+    }
+  });
+  return response;
+};

@@ -10,13 +10,11 @@ const RowMaterials = ({ material }) => {
   const history = useHistory();
 
   const onEdit = () => {
-    console.log("EDITAR MATERIAL");
     localStorage.setItem('actualMaterial', JSON.stringify(material));
     history.push('/materials/edit')
   }
 
   const onDelete = () => {
-    console.log("BORRAR MATERIAL");
     axios.delete(`${API_HOST}/materials/${id}`)
     .then(res => {
       console.log(res);

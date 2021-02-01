@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { storage } from "../firebase/firebase";
 import Upload from "./Upload";
+import axios from "axios";
+import { API_HOST } from "./../utils/utils";
+import Swal from "sweetalert2";
 
 const ThemeBody = ({ btnText }) => {
   const history = useHistory();
-  let id, name, active = true, image_url, textBtn = btnText;
+  let id,
+    name,
+    active = true,
+    image_url,
+    textBtn = btnText;
   const [url, setUrl] = useState(null);
 
-  const theme = JSON.parse(localStorage.getItem('actualTheme'));
+  const theme = JSON.parse(localStorage.getItem("actualTheme"));
   console.log(theme);
 
-  if(theme){
+  if (theme) {
     id = theme.id;
     name = theme.name;
     active = theme.active;
@@ -24,7 +31,64 @@ const ThemeBody = ({ btnText }) => {
 
   const onSubmitData = (data) => {
     console.log(data);
-  }
+    if (theme) {
+      storage.refFromURL(image_url).delete();
+      axios
+        .put(`${API_HOST}/themes/${id}`, data)
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+          storage
+            .refFromURL(image_url)
+            .delete()
+            .then(() => console.log("Done!"))
+            .catch(() => console.log("Error"));
+          Swal.fire({
+            title: "¡Tema actualizado!",
+            text: "Has actualizado un tema exitosamente",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1400,
+          });
+          setTimeout(() => {
+            history.push("/themes");
+          }, 1500);
+        })
+        .catch((err) => {
+          Swal.fire({
+            title: "¡Oops!",
+            text: "Ocurrió un error",
+            icon: "error",
+          });
+          console.log(err);
+        });
+    } else {
+      axios
+        .post(`${API_HOST}/themes`, data)
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+          Swal.fire({
+            title: "¡Tema creado!",
+            text: "Has creado un tema exitosamente",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1400,
+          });
+          setTimeout(() => {
+            history.push("/themes");
+          }, 1500);
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            title: "¡Oops!",
+            text: "Ocurrió un error",
+            icon: "error",
+          });
+        });
+    }
+  };
 
   const onCancel = () => {
     if (url) {
@@ -33,24 +97,28 @@ const ThemeBody = ({ btnText }) => {
         .child(url)
         .delete()
         .then(() => {
-          localStorage.removeItem('actualTheme');
-          history.push("/themes")
+          localStorage.removeItem("actualTheme");
+          history.push("/themes");
         })
         .catch(() => console.log("Error"));
     } else {
-      localStorage.removeItem('actualTheme');
+      localStorage.removeItem("actualTheme");
       history.push("/themes");
     }
-  }
+  };
 
   useEffect(() => {
     register({ name: "name" }, { required: true });
-    register({ name: "image_url" }, { required: true });
-    if(active){
-      register({ name: "active" });
-      setValue('active', active);
+    if (image_url) {
+      register({ name: "image_url" });
+      setValue("image_url", image_url);
+    } else {
+      register({ name: "image_url" }, { required: true });
     }
-    else register({name: "active"}, {required: true});
+    if (active) {
+      register({ name: "active" });
+      setValue("active", active);
+    } else register({ name: "active" }, { required: true });
   }, []);
 
   return (
@@ -138,6 +206,6 @@ const ThemeBody = ({ btnText }) => {
       </form>
     </div>
   );
-}
+};
 
-export default ThemeBody
+export default ThemeBody;

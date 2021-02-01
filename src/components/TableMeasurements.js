@@ -5,7 +5,7 @@ import RowMeasurements from './RowMeasurements'
 
 const TableMeasurements = ({ measurementsArray, materialsArray }) => {
   return (
-    <div className="table-responsive">
+    <div className="table-paintings table-responsive">
       <table className="table table-zones">
         <thead className="table-light text-center">
           <tr>

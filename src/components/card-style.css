@@ -65,7 +65,7 @@
 }*/
 
 @media (max-width: 320px) {
-  .row{
+  .row.row-home-cards{
     flex-direction: column;
     justify-content: space-between;
   }
@@ -103,4 +103,14 @@
   .container-fluid.d-flex {
     flex-direction: column;
   }
+}
+
+@media (min-width: 769px) and (max-width: 1024px){
+  .container-fluid.d-flex {
+    flex-direction: column !important;
+  }
+  .row.row-home-cards{
+    flex-direction: column !important;
+  }
+
 }
