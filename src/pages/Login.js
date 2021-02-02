@@ -10,6 +10,7 @@ const Login = () => {
     console.log(data);
     firebase.auth().signInWithEmailAndPassword(data.email, data.password)
     .then((response) => {
+      localStorage.setItem('loginSession', true);
       Swal.fire({
         title: "¡Bienvenido!",
         text: 'Has iniciado sesión exitosamente',
@@ -19,6 +20,7 @@ const Login = () => {
       });
     })
     .catch(() => {
+      localStorage.setItem('loginSession', false);
       Swal.fire({
         title: "¡Oops!",
         text:

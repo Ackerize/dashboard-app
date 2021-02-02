@@ -14,6 +14,7 @@ const Logout = () => {
       showConfirmButton: false,
       timer: 1500
     });
+    localStorage.clear();
     history.push("/");
   }, []);
   return <></>;

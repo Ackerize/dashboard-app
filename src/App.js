@@ -7,7 +7,9 @@ import 'firebase/auth';
 import Swal from "sweetalert2";
 
 export const App = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(Boolean(localStorage.getItem('loginSession')));
+
+  console.log(user);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((response) => {
