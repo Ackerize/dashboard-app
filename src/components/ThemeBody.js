@@ -32,27 +32,28 @@ const ThemeBody = ({ btnText }) => {
   const onSubmitData = (data) => {
     console.log(data);
     if (theme) {
-      storage.refFromURL(image_url).delete();
       axios
         .put(`${API_HOST}/themes/${id}`, data)
         .then((res) => {
-          console.log(res);
-          console.log(res.data);
-          storage
-            .refFromURL(image_url)
-            .delete()
-            .then(() => console.log("Done!"))
-            .catch(() => console.log("Error"));
-          Swal.fire({
-            title: "¡Tema actualizado!",
-            text: "Has actualizado un tema exitosamente",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1400,
-          });
-          setTimeout(() => {
-            history.push("/themes");
-          }, 1500);
+          const { error, message } = res.data;
+          if (error) {
+            Swal.fire({
+              title: "¡Oops!",
+              text: `${message}`,
+              icon: "error",
+            });
+          } else {
+            Swal.fire({
+              title: "¡Tema actualizado!",
+              text: "Has actualizado un tema exitosamente",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1400,
+            });
+            setTimeout(() => {
+              history.push("/themes");
+            }, 1500);
+          }
         })
         .catch((err) => {
           Swal.fire({
@@ -60,24 +61,30 @@ const ThemeBody = ({ btnText }) => {
             text: "Ocurrió un error",
             icon: "error",
           });
-          console.log(err);
         });
     } else {
       axios
         .post(`${API_HOST}/themes`, data)
         .then((res) => {
-          console.log(res);
-          console.log(res.data);
-          Swal.fire({
-            title: "¡Tema creado!",
-            text: "Has creado un tema exitosamente",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1400,
-          });
-          setTimeout(() => {
-            history.push("/themes");
-          }, 1500);
+          const { error, message } = res.data;
+          if (error) {
+            Swal.fire({
+              title: "¡Oops!",
+              text: `${message}`,
+              icon: "error",
+            });
+          } else {
+            Swal.fire({
+              title: "¡Tema creado!",
+              text: "Has creado un tema exitosamente",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1400,
+            });
+            setTimeout(() => {
+              history.push("/themes");
+            }, 1500);
+          }
         })
         .catch((err) => {
           console.log(err);

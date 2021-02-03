@@ -16,7 +16,7 @@ const ModalOrder = ({ showModal, setShowModal, order }) => {
       status: newStatus,
     };
     axios
-      .put(`${API_HOST}/orders/update-order-status/${id}`, requestBody)
+      .put(`${API_HOST}/orders/status/${id}`, requestBody)
       .then((res) => {
         console.log(res.data.message);
         setShowModal(false);

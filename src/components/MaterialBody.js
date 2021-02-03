@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -28,18 +28,25 @@ const MaterialBody = ({ btnText }) => {
       axios
         .put(`${API_HOST}/materials/${id}`, data)
         .then((res) => {
-          console.log(res);
-          console.log(res.data);
-          Swal.fire({
-            title: "¡Material actualizado!",
-            text: "Has actualizado un material exitosamente",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1400,
-          });
-          setTimeout(() => {
-            history.push('/materials')
-          }, 1500);
+          const { error, message } = res.data;
+          if (error) {
+            Swal.fire({
+              title: "¡Oops!",
+              text: `${message}`,
+              icon: "error",
+            });
+          } else {
+            Swal.fire({
+              title: "¡Material actualizado!",
+              text: "Has actualizado un material exitosamente",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1400,
+            });
+            setTimeout(() => {
+              history.push("/materials");
+            }, 1500);
+          }
         })
         .catch((err) => {
           Swal.fire({
@@ -51,20 +58,27 @@ const MaterialBody = ({ btnText }) => {
         });
     } else {
       axios
-        .post(`${API_HOST}/materials`,  data )
+        .post(`${API_HOST}/materials`, data)
         .then((res) => {
-          console.log(res);
-          console.log(res.data);
-          Swal.fire({
-            title: "¡Material creado!",
-            text: "Has creado un material exitosamente",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1400,
-          });
-          setTimeout(() => {
-            history.push('/materials')
-          }, 1500);
+          const { error, message } = res.data;
+          if (error) {
+            Swal.fire({
+              title: "¡Oops!",
+              text: `${message}`,
+              icon: "error",
+            });
+          } else {
+            Swal.fire({
+              title: "¡Material creado!",
+              text: "Has creado un material exitosamente",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1400,
+            });
+            setTimeout(() => {
+              history.push("/materials");
+            }, 1500);
+          }
         })
         .catch((err) => {
           console.log(err);

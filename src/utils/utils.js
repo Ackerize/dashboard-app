@@ -85,7 +85,6 @@ export const dataDelete = {
 
 export const findStatus = (status) => {
   switch (status) {
-    case "PENDIENTE":
     case "EN PROCESO":
       return "status pending";
     case "CONFIRMADA":
@@ -100,9 +99,8 @@ export const findStatus = (status) => {
 };
 
 export const statuses = [
-  { value: "PENDIENTE", label: "PENDIENTE" },
-  { value: "CONFIRMADA", label: "CONFIRMADA" },
   { value: "EN PROCESO", label: "EN PROCESO" },
+  { value: "CONFIRMADA", label: "CONFIRMADA" },
   { value: "EN CAMINO", label: "EN CAMINO" },
   { value: "ENTREGADA", label: "ENTREGADA" },
 ];

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { getAllMaterials } from "../api/materials";
 import { API_HOST, findMaterial, formatArray } from "../utils/utils";
@@ -10,39 +10,52 @@ import Swal from "sweetalert2";
 const BodyMeasurement = ({ btnText }) => {
   const [materials, setMaterials] = useState(null);
   const history = useHistory();
-  let id, height, width, active = true, price, material_id, material_name, textBtn = btnText;
+  let id,
+    height,
+    width,
+    active = true,
+    price,
+    material_id,
+    material_name,
+    textBtn = btnText;
 
-  const measurement = JSON.parse(localStorage.getItem('actualMeasurement'));
+  const measurement = JSON.parse(localStorage.getItem("actualMeasurement"));
 
-  if(measurement){
+  if (measurement) {
     id = measurement.id;
     height = measurement.height;
     width = measurement.width;
     active = measurement.active;
     price = measurement.price;
     material_id = measurement.material_id;
-  };
+  }
 
   const { register, handleSubmit, errors, setValue } = useForm();
 
   const onSubmitData = (data) => {
-    console.log(data);
     if (measurement) {
       axios
         .put(`${API_HOST}/measurements/${id}`, data)
         .then((res) => {
-          console.log(res);
-          console.log(res.data);
-          Swal.fire({
-            title: "¡Medidas actualizada!",
-            text: "Has actualizado las medidas exitosamente",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1400,
-          });
-          setTimeout(() => {
-            history.push('/measurements')
-          }, 1500);
+          const { error, message } = res.data;
+          if (error) {
+            Swal.fire({
+              title: "¡Oops!",
+              text: `${message}`,
+              icon: "error",
+            });
+          } else {
+            Swal.fire({
+              title: "¡Medidas actualizada!",
+              text: "Has actualizado las medidas exitosamente",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1400,
+            });
+            setTimeout(() => {
+              history.push("/measurements");
+            }, 1500);
+          }
         })
         .catch((err) => {
           Swal.fire({
@@ -54,20 +67,27 @@ const BodyMeasurement = ({ btnText }) => {
         });
     } else {
       axios
-        .post(`${API_HOST}/measurements`,  data )
+        .post(`${API_HOST}/measurements`, data)
         .then((res) => {
-          console.log(res);
-          console.log(res.data);
-          Swal.fire({
-            title: "¡Medidas creado!",
-            text: "Has creado las medidas exitosamente",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1400,
-          });
-          setTimeout(() => {
-            history.push('/measurements')
-          }, 1500);
+          const { error, message } = res.data;
+          if (error) {
+            Swal.fire({
+              title: "¡Oops!",
+              text: `${message}`,
+              icon: "error",
+            });
+          } else {
+            Swal.fire({
+              title: "¡Medidas creado!",
+              text: "Has creado las medidas exitosamente",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1400,
+            });
+            setTimeout(() => {
+              history.push("/measurements");
+            }, 1500);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -78,48 +98,47 @@ const BodyMeasurement = ({ btnText }) => {
           });
         });
     }
-  }
+  };
 
   const onCancel = () => {
-    history.push('/measurements');
+    history.push("/measurements");
     localStorage.clear();
-  }
+  };
 
   useEffect(() => {
     getAllMaterials().then((response) => {
       setMaterials(formatArray(response.materials));
-    })
-  }, [])
+    });
+  }, []);
 
   useEffect(() => {
     register({ name: "height" }, { required: true });
     register({ name: "width" }, { required: true });
     register({ name: "price" }, { required: true });
-    if(material_id){
+    if (material_id) {
       register({ name: "material_id" }, { required: true });
-      setValue('material_id', material_id);
-    }else{
+      setValue("material_id", material_id);
+    } else {
       register({ name: "material_id" }, { required: true });
     }
-    
-    if(active){
+
+    if (active) {
       register({ name: "active" });
-      setValue('active', active);
-    }
-    else register({name: "active"}, {required: true});
+      setValue("active", active);
+    } else register({ name: "active" }, { required: true });
   }, []);
 
-  if(!materials) return null;
+  if (!materials) return null;
 
-  console.log(materials)
-  if(material_id){
-    material_name = findMaterial(materials, material_id)
+  console.log(materials);
+  if (material_id) {
+    material_name = findMaterial(materials, material_id);
   }
 
   const handleChange = (selectedOption) => {
-    setValue('material_id', selectedOption.value);
-  }
-  
+    setValue("material_id", selectedOption.value);
+  };
+
   return (
     <div className="card-body card-body-painting">
       <form onSubmit={handleSubmit(onSubmitData)}>
@@ -136,9 +155,7 @@ const BodyMeasurement = ({ btnText }) => {
                 })}
                 defaultValue={width}
               />
-              {errors.width && (
-                <div className="error">Ingresa el ancho</div>
-              )}
+              {errors.width && <div className="error">Ingresa el ancho</div>}
             </div>
           </div>
         </div>
@@ -155,9 +172,7 @@ const BodyMeasurement = ({ btnText }) => {
                 })}
                 defaultValue={height}
               />
-              {errors.height && (
-                <div className="error">Ingresa el alto</div>
-              )}
+              {errors.height && <div className="error">Ingresa el alto</div>}
             </div>
           </div>
         </div>
@@ -174,9 +189,7 @@ const BodyMeasurement = ({ btnText }) => {
                 })}
                 defaultValue={price}
               />
-              {errors.price && (
-                <div className="error">Ingresa el precio</div>
-              )}
+              {errors.price && <div className="error">Ingresa el precio</div>}
             </div>
           </div>
         </div>
@@ -226,7 +239,7 @@ const BodyMeasurement = ({ btnText }) => {
           error={errors.material_id}
           errorMessage="Selecciona un material"
           isMulti={false}
-          value={material_id && { label: material_name, value: material_id}}
+          value={material_id && { label: material_name, value: material_id }}
         />
         <div className="btn-custom-container" id="container-btn">
           <button className="btn btn--radius-2" type="submit" id="btn-submit">
@@ -244,6 +257,6 @@ const BodyMeasurement = ({ btnText }) => {
       </form>
     </div>
   );
-}
+};
 
-export default BodyMeasurement
+export default BodyMeasurement;

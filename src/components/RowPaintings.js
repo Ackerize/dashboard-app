@@ -1,6 +1,5 @@
 import axios from "axios";
 import React from "react";
-import { BiWindows } from "react-icons/bi";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import { API_HOST } from "../utils/utils";
@@ -8,7 +7,7 @@ import Button from "./Button";
 
 
 const RowPaintings = ({ painting }) => {
-  const { id, image_url, name, description, measurements, price, stock, active } = painting;
+  const { id, image_url, name, description, stock, active } = painting;
 
   let history = useHistory();
 
@@ -21,16 +20,24 @@ const RowPaintings = ({ painting }) => {
     .then((res) => {
       console.log(res);
       console.log(res.data);
-      Swal.fire({
-        title: "¡Cuadro eliminado!.",
-        text: "'Has eliminado correctamente el cuadro'",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      setTimeout(() => {
-       window.location.reload(false);
-      }, 1500);
+      if(res.data.error){
+        Swal.fire({
+          title: "¡Oh no!.",
+          text: `${res.data.message}`,
+          icon: "error",
+        });
+      }else{
+        Swal.fire({
+          title: "¡Cuadro eliminado!.",
+          text: "Has eliminado correctamente el cuadro",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setTimeout(() => {
+         window.location.reload(false);
+        }, 1500);
+      }
     });
   }
 

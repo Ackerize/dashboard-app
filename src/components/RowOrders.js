@@ -1,7 +1,6 @@
 import moment from "moment";
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { getOrderDetail } from "../api/orders";
 import { findStatus } from "../utils/utils";
 import Button from "./Button";
 

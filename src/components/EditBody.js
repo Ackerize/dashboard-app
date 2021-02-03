@@ -78,14 +78,11 @@ const EditBody = ({ painting }) => {
     );
 
     if (flag) {
-      console.log(data);
       const deleteMaterials = onDeleteItems(initialMaterials, data.materials);
       const deleteMeasurements = onDeleteItems(
         initialMeasurements,
         data.measurements
       );
-      console.log(deleteMaterials);
-      console.log(deleteMeasurements);
       const bodyMaterials = {
         materials: deleteMaterials,
       };
@@ -96,29 +93,53 @@ const EditBody = ({ painting }) => {
       axios
         .put(`${API_HOST}/paintings/${id}`, data)
         .then((response) => {
-          console.log(response.data);
-          return axios.delete(`${API_HOST}/paintings/materials/${id}`, {
-            data: bodyMaterials,
-          });
+          const { error, message } = response.data;
+          if (error) {
+            Swal.fire({
+              title: "¡Oops!",
+              text: `${message}`,
+              icon: "error",
+            });
+          } else {
+            return axios.delete(`${API_HOST}/paintings/materials/${id}`, {
+              data: bodyMaterials,
+            });
+          }
         })
         .then((response) => {
-          console.log(response.data);
-          return axios.delete(`${API_HOST}/paintings/measurements/${id}`, {
-            data: bodyMeasurements,
-          });
+          const { error, message } = response.data;
+          if (error) {
+            Swal.fire({
+              title: "¡Oops!",
+              text: `${message}`,
+              icon: "error",
+            });
+          } else {
+            return axios.delete(`${API_HOST}/paintings/measurements/${id}`, {
+              data: bodyMeasurements,
+            });
+          }
         })
         .then((response) => {
-          console.log(response.data);
-          Swal.fire({
-            title: "¡Cuadro actualizado!",
-            text: "Has actualizado un cuadro exitosamente",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          setTimeout(() => {
-            history.push("/paintings");
-          }, 1500);
+          const { error, message } = response.data;
+          if (error) {
+            Swal.fire({
+              title: "¡Oops!",
+              text: `${message}`,
+              icon: "error",
+            });
+          } else {
+            Swal.fire({
+              title: "¡Cuadro actualizado!",
+              text: "Has actualizado un cuadro exitosamente",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            setTimeout(() => {
+              history.push("/paintings");
+            }, 1500);
+          }
         });
     } else {
       Swal.fire({
@@ -127,7 +148,6 @@ const EditBody = ({ painting }) => {
           "Revisa que tus medidas coincidan con los materiales seleccionados",
         icon: "warning",
       });
-      console.log("TODO MAL");
     }
   };
 

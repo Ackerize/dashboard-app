@@ -26,13 +26,11 @@ const Details = (props) => {
   if (!order) return null;
   if (!details) return null;
 
-  const { status, total_amount, delivery_zone } = order;
+  const { total_amount, delivery_zone } = order;
   const { delivery_cost } = delivery_zone;
   const total = formatFloat(total_amount);
   const deliveryCost = formatFloat(delivery_cost);
   const subtotal = formatFloat(total_amount - delivery_cost);
-
-  
 
   const onBack = () => {
     history.push("/history");

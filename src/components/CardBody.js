@@ -33,7 +33,6 @@ const CardBody = ({ btnText }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
 
   const onSubmitData = (data) => {
-
     const flag = onValidatePairs(
       selectedMaterial,
       selectedMeasurement,
@@ -41,21 +40,27 @@ const CardBody = ({ btnText }) => {
     );
 
     if (flag) {
-      console.log(data);
       axios.post(`${API_HOST}/paintings`, data).then((response) => {
-        console.log(response);
-        Swal.fire({
-          title: "¡Cuadro creado!.",
-          text: "Has creado un cuadro exitosamente",
-          icon: "success",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        setTimeout(() => {
-          history.push("/paintings");
-        }, 1500);
+        const { error, message } = response.data;
+        if (error) {
+          Swal.fire({
+            title: "¡Oops!",
+            text: `${message}`,
+            icon: "error",
+          });
+        } else {
+          Swal.fire({
+            title: "¡Cuadro creado!.",
+            text: "Has creado un cuadro exitosamente",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setTimeout(() => {
+            history.push("/paintings");
+          }, 1500);
+        }
       });
-      
     } else {
       Swal.fire({
         title: "¡Oops!",
@@ -63,7 +68,6 @@ const CardBody = ({ btnText }) => {
           "Revisa que tus medidas coincidan con los materiales seleccionados",
         icon: "warning",
       });
-      console.log("TODO MAL");
     }
   };
 

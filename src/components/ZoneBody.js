@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -26,18 +26,25 @@ const ZoneBody = ({ btnText }) => {
       axios
         .put(`${API_HOST}/delivery-zones/${id}`, data)
         .then((res) => {
-          console.log(res);
-          console.log(res.data);
-          Swal.fire({
-            title: "¡Zona de entrega actualizada!",
-            text: "Has actualizado una zona de entrega exitosamente",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1400,
-          });
-          setTimeout(() => {
-            history.push('/delivery-zones')
-          }, 1500);
+          const {error, message} = res.data;
+          if(error) {
+            Swal.fire({
+              title: "¡Oops!",
+              text: `${message}`,
+              icon: "error",
+            });
+          }else{
+            Swal.fire({
+              title: "¡Zona de entrega actualizada!",
+              text: "Has actualizado una zona de entrega exitosamente",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1400,
+            });
+            setTimeout(() => {
+              history.push('/delivery-zones')
+            }, 1500);
+          }
         })
         .catch((err) => {
           Swal.fire({
@@ -45,27 +52,32 @@ const ZoneBody = ({ btnText }) => {
             text: "Ocurrió un error",
             icon: "error",
           });
-          console.log(err);
         });
     } else {
       axios
         .post(`${API_HOST}/delivery-zones`,  data )
         .then((res) => {
-          console.log(res);
-          console.log(res.data);
-          Swal.fire({
-            title: "¡Zona de entrega creado!",
-            text: "Has creado una zona de entrega exitosamente",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1400,
-          });
-          setTimeout(() => {
-            history.push('/delivery-zones')
-          }, 1500);
+          const {error, message} = res.data;
+          if(error){
+            Swal.fire({
+              title: "¡Oops!",
+              text: `${message}`,
+              icon: "error",
+            });
+          }else{
+            Swal.fire({
+              title: "¡Zona de entrega creado!",
+              text: "Has creado una zona de entrega exitosamente",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1400,
+            });
+            setTimeout(() => {
+              history.push('/delivery-zones')
+            }, 1500);
+          }
         })
         .catch((err) => {
-          console.log(err);
           Swal.fire({
             title: "¡Oops!",
             text: "Ocurrió un error",

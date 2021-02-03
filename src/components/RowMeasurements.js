@@ -1,45 +1,48 @@
-import axios from 'axios';
-import React, {useState, useEffect} from 'react'
-import { useHistory } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import { getAllMaterials } from '../api/materials';
-import { API_HOST, findMaterialById } from '../utils/utils';
-import Button from './Button';
+import axios from "axios";
+import React from "react";
+import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
+import { API_HOST, findMaterialById } from "../utils/utils";
+import Button from "./Button";
 
 const RowMeasurements = ({ measurement, materialsArray }) => {
-  const {id, height, width, price, material_id, active} = measurement;
+  const { id, height, width, price, material_id, active } = measurement;
   const history = useHistory();
 
   const onEdit = () => {
-    localStorage.setItem('actualMeasurement', JSON.stringify(measurement));
-    history.push('/measurements/edit');
-  }
+    localStorage.setItem("actualMeasurement", JSON.stringify(measurement));
+    history.push("/measurements/edit");
+  };
 
   const onDelete = () => {
-    axios.delete(`${API_HOST}/measurements/${id}`)
-    .then(res => {
-      console.log(res);
-      console.log(res.data);
-      Swal.fire({
-        title: "¡Medidas borradas!",
-        text: "Has borrado las medidas exitosamente",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1400,
-      });
-      setTimeout(() => {
-        window.location.reload(false);
-      }, 1500);
-    })
-  }
+    axios.delete(`${API_HOST}/measurements/${id}`).then((res) => {
+      const { error, message } = res.data;
+      if (error) {
+        Swal.fire({
+          title: "¡Oops!",
+          text: `${message}`,
+          icon: "error",
+        });
+      } else {
+        Swal.fire({
+          title: "¡Medidas borradas!",
+          text: "Has borrado las medidas exitosamente",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1400,
+        });
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 1500);
+      }
+    });
+  };
 
   const material_name = findMaterialById(materialsArray, material_id);
 
   return (
     <tr className="align-middle text-center">
-      <th scope="row">
-        {id}
-      </th>
+      <th scope="row">{id}</th>
       <td>{`${width} m`}</td>
       <td>{`${height} m`}</td>
       <td>{`$ ${price}`}</td>
@@ -52,7 +55,7 @@ const RowMeasurements = ({ measurement, materialsArray }) => {
         </div>
       </td>
     </tr>
-  )
-}
+  );
+};
 
-export default RowMeasurements
+export default RowMeasurements;

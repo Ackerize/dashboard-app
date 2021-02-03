@@ -4,10 +4,9 @@ import Swal from "sweetalert2";
 import firebase from '../firebase/firebase'
 
 const Login = () => {
-  const { register, handleSubmit, errors, setValue } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const onSubmitData = (data) => {
-    console.log(data);
     firebase.auth().signInWithEmailAndPassword(data.email, data.password)
     .then((response) => {
       localStorage.setItem('loginSession', true);

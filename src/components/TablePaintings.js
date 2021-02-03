@@ -1,5 +1,5 @@
 import { map } from 'lodash'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { cabecerasPaintings } from '../utils/utils'
 import './Navbar.css';
