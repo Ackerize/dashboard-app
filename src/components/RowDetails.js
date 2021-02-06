@@ -1,12 +1,26 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import { getAllMeasurements } from "../api/measurements";
+import { findMeasurements } from "../utils/utils";
 
 const RowDetails = ({ order }) => {
-  console.log("ENTRE")
-  const {amount, measurements, quantity, price, painting, material} = order;
+  const [measurements, setMeasurements] = useState(null);
+  const {amount, measurements:idMeasurement, quantity, price, painting, material} = order;
   const {name:painting_name, image_url} = painting;
   const {name:material_name} = material;
 
-  console.log(order)
+  useEffect(() => {
+    getAllMeasurements().then((response) => setMeasurements(response))
+  }, [])
+
+  if(!measurements) return null;
+
+  let textMeasures;
+  
+  if(idMeasurement[0] == 'A'){
+    textMeasures = idMeasurement;
+  }else{
+    textMeasures = findMeasurements(measurements, idMeasurement);
+  }
 
   return (
     <tr className="align-middle text-center">
@@ -16,7 +30,7 @@ const RowDetails = ({ order }) => {
           <div className="text-container-product">
             <p className="product-name">{painting_name}</p>
             <p className="description-product-item material-name">{material_name}</p>
-            <p className="description-product-item dimensions">{measurements}</p>
+            <p className="description-product-item dimensions">{textMeasures}</p>
           </div>
         </div>
       </th>

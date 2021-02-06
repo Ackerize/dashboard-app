@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import { getAllMeasurements } from "../api/measurements";
 import { getOrderById, getOrderDetail } from "../api/orders";
 import Button from "../components/Button";
 import CustomerInfo from "../components/CustomerInfo";
 import HeaderOrderDetails from "../components/HeaderOrderDetails";
 import SummaryOrder from "../components/SummaryOrder";
 import TableDetails from "../components/TableDetails";
-import { formatFloat } from "../utils/utils";
+import { findMeasurements, formatFloat } from "../utils/utils";
 import "./details-container.css";
 
 const Details = (props) => {
   const { id } = useParams();
   const [details, setDetails] = useState(null);
   const [order, setOrder] = useState(null);
+  
   const history = useHistory();
 
   useEffect(() => {
@@ -23,8 +25,9 @@ const Details = (props) => {
     getOrderById(id).then((response) => setOrder(response));
   }, []);
 
-  if (!order) return null;
-  if (!details) return null;
+  
+
+  if (!order || !details) return null;
 
   const { total_amount, delivery_zone } = order;
   const { delivery_cost } = delivery_zone;

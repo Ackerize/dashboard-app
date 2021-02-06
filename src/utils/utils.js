@@ -226,13 +226,18 @@ export const formatArrayMeasurements = (array, materials) => {
   return map(array, (item) => {
     const materialName = findMaterial(materials, item.material_id);
     return {
-      label: `${item.width} x ${item.height} cm -  ${materialName}`,
+      label: `${item.width} x ${item.height} m -  ${materialName}`,
       value: item.id,
     };
   });
 };
 export const findMaterial = (materials, idMaterial) =>
   materials.filter((item) => item.value == idMaterial)[0].label;
+
+export const findMeasurements = (measurements, idMeasurement) => {
+  const measures = measurements.filter((item) => item.id == idMeasurement)[0];
+  return `${measures.width} x ${measures.height} m`
+}
 
 export const findMaterialById = (materials, idMaterial) =>
   materials.filter((item) => item.id === idMaterial)[0].name;
