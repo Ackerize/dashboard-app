@@ -23,10 +23,11 @@ const MaterialBody = ({ btnText }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
 
   const onSubmitData = (data) => {
-    console.log(data);
+    const idToken = localStorage.getItem('idToken');
+    const authStr = 'Bearer '.concat(idToken);
     if (material) {
       axios
-        .put(`${API_HOST}/materials/${id}`, data)
+        .put(`${API_HOST}/materials/${id}`, data, {headers: {'authorization': authStr} })
         .then((res) => {
           const { error, message } = res.data;
           if (error) {
@@ -58,7 +59,7 @@ const MaterialBody = ({ btnText }) => {
         });
     } else {
       axios
-        .post(`${API_HOST}/materials`, data)
+        .post(`${API_HOST}/materials`, data, {headers: {'authorization': authStr} })
         .then((res) => {
           const { error, message } = res.data;
           if (error) {

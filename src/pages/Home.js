@@ -9,6 +9,7 @@ import themeImage from '../assets/theme.jpg';
 import deliveryImage from '../assets/delivery.jpg';
 
 const Home = () => {
+
   return (
     <>
       <h1 className="text-center text-uppercase mt-4 mb-3">Home</h1>

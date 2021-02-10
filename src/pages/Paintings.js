@@ -11,7 +11,7 @@ const Paintings = () => {
 
   useEffect(() => {
     getAllPaintings().then((response) => {
-      const {paintings} = response;
+      const paintings = response;
       setPaintingsArray(paintings);
       setFilteredPaintings(paintings);
     })

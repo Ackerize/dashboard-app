@@ -10,7 +10,7 @@ const FormEdit = () => {
 
   useEffect(() => {
     getOnePaintingById(id).then((response) => {
-      setPainting(response[0]);
+      setPainting(response);
     });
   }, []);
 

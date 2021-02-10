@@ -1,6 +1,7 @@
 import React from 'react'
 import BodyMeasurement from '../components/BodyMeasurement'
 import CardHeading from '../components/CardHeading'
+
 const MeasurementForm = () => {
   return (
     <div className="page-wrapper p-t-45 p-b-50">

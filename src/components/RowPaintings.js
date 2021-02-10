@@ -16,14 +16,15 @@ const RowPaintings = ({ painting }) => {
   }
 
   const onDelete = () => {
-    axios.delete(`${API_HOST}/paintings/${id}`)
+    const idToken = localStorage.getItem('idToken');
+    const authStr = 'Bearer '.concat(idToken);
+    axios.delete(`${API_HOST}/paintings/${id}`, {headers: {'authorization': authStr} })
     .then((res) => {
-      console.log(res);
-      console.log(res.data);
-      if(res.data.error){
+      const { error, message } = res.data;
+      if(error){
         Swal.fire({
           title: "¡Oh no!.",
-          text: `${res.data.message}`,
+          text: `${message}`,
           icon: "error",
         });
       }else{

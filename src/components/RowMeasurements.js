@@ -15,7 +15,9 @@ const RowMeasurements = ({ measurement, materialsArray }) => {
   };
 
   const onDelete = () => {
-    axios.delete(`${API_HOST}/measurements/${id}`).then((res) => {
+    const idToken = localStorage.getItem('idToken');
+    const authStr = 'Bearer '.concat(idToken);
+    axios.delete(`${API_HOST}/measurements/${id}`, {headers: {'authorization': authStr} }).then((res) => {
       const { error, message } = res.data;
       if (error) {
         Swal.fire({

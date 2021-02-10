@@ -10,15 +10,15 @@ const RowZone = ({ zone }) => {
   const history = useHistory();
 
   const onEdit = () => {
-    console.log("EDITAR ZONA DE ENVIO");
     localStorage.setItem("actualZone", JSON.stringify(zone));
     history.push("delivery-zones/edit");
   };
 
   const onDelete = () => {
-    console.log("BORRAR ZONA");
+    const idToken = localStorage.getItem('idToken');
+    const authStr = 'Bearer '.concat(idToken);
     axios
-      .delete(`${API_HOST}/delivery-zones/${id}`)
+      .delete(`${API_HOST}/delivery-zones/${id}`, {headers: {'authorization': authStr} })
       .then((res) => {
         const { error, message } = res.data;
         if (error) {

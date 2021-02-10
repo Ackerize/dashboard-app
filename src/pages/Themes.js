@@ -16,7 +16,7 @@ const Themes = () => {
 
   useEffect(() => {
     getAllThemes().then(response => {
-      const array = response.themes;
+      const array = response;
       array.sort(sortBy("id"));
       setThemes(array);
       setFilteredThemes(array);

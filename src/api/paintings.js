@@ -1,25 +1,25 @@
 import { API_HOST } from "../utils/utils";
+import axios from "axios";
 
 export function getAllPaintings(){
   const url = `${API_HOST}/paintings`;
+  const idToken = localStorage.getItem('idToken');
+  const authStr = 'Bearer '.concat(idToken);
 
-  return fetch(url)
-  .then((response) => {
-    return response.json();
-  })
-  .then((result) => {
-    return result;
-  })
+  return axios.get(url, {headers: {'authorization': authStr} })
+  .then((response) => response.data.paintings)
+  .catch((err) => console.log(err));
 }
 
 export function getOnePaintingById(idPainting){
   const url = `${API_HOST}/paintings/${idPainting}`;
+  const idToken = localStorage.getItem('idToken');
+  const authStr = 'Bearer '.concat(idToken);
 
-  return fetch(url)
+  return axios.get(url, {headers: {'authorization': authStr} })
   .then((response) => {
-    return response.json();
+    console.log(response.data.painting_info[0])
+    return response.data.painting_info[0]
   })
-  .then((result) => {
-    return result.painting_info;
-  })
+  .catch((err) => console.log(err));
 }

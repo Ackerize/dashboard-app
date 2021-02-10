@@ -27,7 +27,7 @@ const Measurements = () => {
 
   useEffect(() => {
     getAllMaterials().then((response) => {
-      setMaterials(response.materials);
+      setMaterials(response);
     });
   }, []);
 

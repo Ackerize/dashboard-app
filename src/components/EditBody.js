@@ -90,8 +90,10 @@ const EditBody = ({ painting }) => {
         measurements: deleteMeasurements,
       };
 
+      const idToken = localStorage.getItem('idToken');
+      const authStr = 'Bearer '.concat(idToken);
       axios
-        .put(`${API_HOST}/paintings/${id}`, data)
+        .put(`${API_HOST}/paintings/${id}`, data, {headers: {'authorization': authStr} })
         .then((response) => {
           const { error, message } = response.data;
           if (error) {
@@ -103,6 +105,7 @@ const EditBody = ({ painting }) => {
           } else {
             return axios.delete(`${API_HOST}/paintings/materials/${id}`, {
               data: bodyMaterials,
+              headers: {'authorization': authStr}
             });
           }
         })
@@ -117,6 +120,7 @@ const EditBody = ({ painting }) => {
           } else {
             return axios.delete(`${API_HOST}/paintings/measurements/${id}`, {
               data: bodyMeasurements,
+              headers: {'authorization': authStr}
             });
           }
         })
@@ -153,13 +157,13 @@ const EditBody = ({ painting }) => {
 
   useEffect(() => {
     getAllThemes().then((response) => {
-      setThemes(formatArray(response.themes));
+      setThemes(formatArray(response));
     });
   }, []);
 
   useEffect(() => {
     getAllMaterials().then((response) => {
-      setMaterials(formatArray(response.materials));
+      setMaterials(formatArray(response));
     });
     setSelectedMaterial(filterMaterialsArray(painting_materials));
   }, []);

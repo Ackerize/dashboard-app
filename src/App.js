@@ -13,6 +13,7 @@ export const App = () => {
     firebase.auth().onAuthStateChanged((response) => {
       if(response){
         if(response.uid === 'XGR2R7uy4nXn01kk7BNqTPPY3mT2'){
+          localStorage.setItem('idToken', response.ya);
           setUser(response);
         }else{
           firebase.auth().signOut();

@@ -40,7 +40,9 @@ const CardBody = ({ btnText }) => {
     );
 
     if (flag) {
-      axios.post(`${API_HOST}/paintings`, data).then((response) => {
+      const idToken = localStorage.getItem('idToken');
+      const authStr = 'Bearer '.concat(idToken);
+      axios.post(`${API_HOST}/paintings`, data, {headers: {'authorization': authStr} }).then((response) => {
         const { error, message } = response.data;
         if (error) {
           Swal.fire({

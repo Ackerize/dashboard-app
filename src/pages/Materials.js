@@ -16,7 +16,7 @@ const Materials = () => {
 
   useEffect(() => {
     getAllMaterials().then(response => {
-      const array = response.materials;
+      const array = response;
       array.sort(sortBy("id"));
       setMaterials(array);
       setFilteredMaterials(array);

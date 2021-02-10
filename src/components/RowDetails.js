@@ -4,7 +4,7 @@ import { findMeasurements } from "../utils/utils";
 
 const RowDetails = ({ order }) => {
   const [measurements, setMeasurements] = useState(null);
-  const {amount, measurements:idMeasurement, quantity, price, painting, material} = order;
+  const {amount, measurements:textMeasurement, quantity, price, painting, material} = order;
   const {name:painting_name, image_url} = painting;
   const {name:material_name} = material;
 
@@ -14,14 +14,6 @@ const RowDetails = ({ order }) => {
 
   if(!measurements) return null;
 
-  let textMeasures;
-  
-  if(idMeasurement[0] == 'A'){
-    textMeasures = idMeasurement;
-  }else{
-    textMeasures = findMeasurements(measurements, idMeasurement);
-  }
-
   return (
     <tr className="align-middle text-center">
       <th scope="row" width="40%">
@@ -30,7 +22,7 @@ const RowDetails = ({ order }) => {
           <div className="text-container-product">
             <p className="product-name">{painting_name}</p>
             <p className="description-product-item material-name">{material_name}</p>
-            <p className="description-product-item dimensions">{textMeasures}</p>
+            <p className="description-product-item dimensions">{`${textMeasurement} m`}</p>
           </div>
         </div>
       </th>

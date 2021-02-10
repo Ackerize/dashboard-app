@@ -16,7 +16,7 @@ const DeliveryZones = () => {
 
   useEffect(() => {
     getAllDeliveryZones().then(response => {
-      const array = response.delivery_zones;
+      const array = response;
       array.sort(sortBy("id"));
       setZones(array);
       setFilteredZones(array);

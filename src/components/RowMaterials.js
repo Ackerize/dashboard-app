@@ -15,7 +15,9 @@ const RowMaterials = ({ material }) => {
   };
 
   const onDelete = () => {
-    axios.delete(`${API_HOST}/materials/${id}`).then((res) => {
+    const idToken = localStorage.getItem('idToken');
+    const authStr = 'Bearer '.concat(idToken);
+    axios.delete(`${API_HOST}/materials/${id}`, {headers: {'authorization': authStr} }).then((res) => {
       const { error, message } = res.data;
       if (error || message === 'No se puede eliminar el material porque hay registros que dependen de él') {
         Swal.fire({

@@ -18,7 +18,7 @@ const Details = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    getOrderDetail(id).then((response) => setDetails(response.order_detail));
+    getOrderDetail(id).then((response) => setDetails(response));
   }, []);
 
   useEffect(() => {

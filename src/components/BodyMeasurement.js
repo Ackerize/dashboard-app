@@ -107,7 +107,7 @@ const BodyMeasurement = ({ btnText }) => {
 
   useEffect(() => {
     getAllMaterials().then((response) => {
-      setMaterials(formatArray(response.materials));
+      setMaterials(formatArray(response));
     });
   }, []);
 
