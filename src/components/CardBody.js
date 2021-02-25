@@ -175,24 +175,6 @@ const CardBody = ({ btnText }) => {
           </div>
         </div>
         <div className="form-row">
-          <div className="name">Existencias: </div>
-          <div className="value">
-            <div className="input-group">
-              <input
-                className="input--style-5"
-                type="number"
-                step="1"
-                min="0"
-                name="stock"
-                ref={register({ required: true, valueAsNumber: true })}
-              />
-              {errors.stock && (
-                <div className="error">Ingresa el stock del cuadro</div>
-              )}
-            </div>
-          </div>
-        </div>
-        <div className="form-row">
           <label className="label label--block">Disponible?</label>
           <div className="input-group mt-4">
             <div className="form-check form-check-inline custom-check">
