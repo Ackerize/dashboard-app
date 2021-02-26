@@ -16,11 +16,13 @@ const DeliveryZones = () => {
 
   useEffect(() => {
     getAllDeliveryZones().then(response => {
-      const array = response;
-      array.sort(sortBy("id"));
-      setZones(array);
-      setFilteredZones(array);
-    })
+      if(response){
+        const array = response;
+        array.sort(sortBy("id"));
+        setZones(array);
+        setFilteredZones(array);
+      }
+    });
   }, []);
 
   useEffect(() => {

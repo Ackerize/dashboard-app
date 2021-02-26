@@ -23,9 +23,11 @@ const History = () => {
 
   useEffect(() => {
     getAllOrders().then((response) => {
-      const orders = response;
-      setOrdersArray(orders);
-      setResultingOrders(orders);
+      if (response) {
+        const orders = response;
+        setOrdersArray(orders);
+        setResultingOrders(orders);
+      }
     });
   }, []);
 

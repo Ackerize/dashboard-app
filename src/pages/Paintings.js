@@ -1,32 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import Button from "../components/Button";
 import Search from "../components/Search";
-import { getAllPaintings } from '../api/paintings';
+import { getAllPaintings } from "../api/paintings";
 import TablePaintings from "../components/TablePaintings";
 
 const Paintings = () => {
   const [paintingsArray, setPaintingsArray] = useState(null);
-  const [filterWord, setFilterWord] = useState('');
+  const [filterWord, setFilterWord] = useState("");
   const [filteredPaintings, setFilteredPaintings] = useState([]);
 
   useEffect(() => {
     getAllPaintings().then((response) => {
-      const paintings = response;
-      setPaintingsArray(paintings);
-      setFilteredPaintings(paintings);
-    })
+      if (response) {
+        const paintings = response;
+        setPaintingsArray(paintings);
+        setFilteredPaintings(paintings);
+      }
+    });
   }, []);
 
   useEffect(() => {
-    if(!paintingsArray) return null;
+    if (!paintingsArray) return null;
     let regexInput = new RegExp(filterWord, "gi");
-    const paintingsFilter = paintingsArray.filter((item) =>{
+    const paintingsFilter = paintingsArray.filter((item) => {
       return item.name.match(regexInput);
     });
     setFilteredPaintings(paintingsFilter);
-  }, [filterWord])
+  }, [filterWord]);
 
-  if(!paintingsArray) return null;
+  if (!paintingsArray) return null;
 
   return (
     <div>

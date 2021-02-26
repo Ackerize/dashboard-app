@@ -18,10 +18,12 @@ const Measurements = () => {
 
   useEffect(() => {
     getAllMeasurements().then((response) => {
-      const array = response;
-      array.sort(sortBy("id"));
-      setMeasurements(array);
-      setFilteredMeasurements(array);
+      if (response) {
+        const array = response;
+        array.sort(sortBy("id"));
+        setMeasurements(array);
+        setFilteredMeasurements(array);
+      }
     });
   }, []);
 
