@@ -47,18 +47,19 @@ const History = () => {
   }, [startDate, endDate]);
 
   useEffect(() => {
-    if (!ordersArray) return null;
-    let regexInput = new RegExp(searchedWord, "gi");
-    const ordersFilter = ordersArray.filter((order) => {
-      return (
-        order.customer_name.match(regexInput) ||
-        order.delivery_zone.name.match(regexInput) ||
-        order.status.match(regexInput) ||
-        order.id.toString().match(regexInput) ||
-        formatDateSearch(order.order_date).match(regexInput)
-      );
-    });
-    setResultingOrders(ordersFilter);
+    if (ordersArray) {
+      let regexInput = new RegExp(searchedWord, "gi");
+      const ordersFilter = ordersArray.filter((order) => {
+        return (
+          order.customer_name.match(regexInput) ||
+          order.delivery_zone.name.match(regexInput) ||
+          order.status.match(regexInput) ||
+          order.id.toString().match(regexInput) ||
+          formatDateSearch(order.order_date).match(regexInput)
+        );
+      });
+      setResultingOrders(ordersFilter);
+    }
   }, [searchedWord]);
 
   useEffect(() => {
@@ -68,8 +69,6 @@ const History = () => {
       setResultingOrders(copyArray);
     }
   }, [selectedOption]);
-
-  if (!ordersArray) return null;
 
   return (
     <div>
@@ -95,7 +94,7 @@ const History = () => {
         />
         <Search setFilterWord={setSearchedWord} />
       </div>
-      <TableOrders orders={resultingOrders} />
+      {ordersArray && <TableOrders orders={resultingOrders} />}
     </div>
   );
 };
