@@ -49,7 +49,6 @@ const RowPaintings = ({ painting }) => {
       </th>
       <td>{name}</td>
       <td className="description-cell col-5">{description}</td>
-      <td>{stock}</td>
       <td>{active ? "Si" : "No"}</td>
       <td colSpan="2" className="col-1">
         <div className="cell-container">

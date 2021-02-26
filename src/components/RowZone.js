@@ -41,6 +41,7 @@ const RowZone = ({ zone }) => {
         }
       })
       .catch((err) => {
+        console.log(err);
         Swal.fire({
           title: "¡Oops!",
           text: "Ocurrió un error",

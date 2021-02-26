@@ -42,7 +42,7 @@ const CardBody = ({ btnText }) => {
     if (flag) {
       const idToken = localStorage.getItem('idToken');
       const authStr = 'Bearer '.concat(idToken);
-      axios.post(`${API_HOST}/paintings`, data, {headers: {'authorization': authStr} }).then((response) => {
+      axios.post(`${API_HOST}/paintings`, {...data, stock: 0}, {headers: {'authorization': authStr} }).then((response) => {
         const { error, message } = response.data;
         if (error) {
           Swal.fire({
@@ -84,13 +84,13 @@ const CardBody = ({ btnText }) => {
 
   useEffect(() => {
     getAllThemes().then((response) => {
-      setThemes(formatArray(response.themes));
+      setThemes(formatArray(response));
     });
   }, []);
 
   useEffect(() => {
     getAllMaterials().then((response) => {
-      setMaterials(formatArray(response.materials));
+      setMaterials(formatArray(response));
     });
   }, []);
 

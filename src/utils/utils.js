@@ -6,7 +6,6 @@ export const cabecerasPaintings = [
   "Cuadro",
   "Nombre",
   "Descripcion",
-  "Existencias",
   "Disponible",
   "Opciones",
   "",
@@ -51,7 +50,7 @@ export const cabecerasMeasurements = [
   "Opciones",
 ];
 
-export const API_HOST = "https://protected-ocean-09865.herokuapp.com/v1/";
+export const API_HOST = "https://protected-ocean-09865.herokuapp.com/v1";
 
 const characters =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

@@ -33,9 +33,11 @@ const BodyMeasurement = ({ btnText }) => {
   const { register, handleSubmit, errors, setValue } = useForm();
 
   const onSubmitData = (data) => {
+    const idToken = localStorage.getItem('idToken');
+    const authStr = 'Bearer '.concat(idToken);
     if (measurement) {
       axios
-        .put(`${API_HOST}/measurements/${id}`, data)
+        .put(`${API_HOST}/measurements/${id}`, data, {headers: {'authorization': authStr} })
         .then((res) => {
           const { error, message } = res.data;
           if (error) {
@@ -67,7 +69,7 @@ const BodyMeasurement = ({ btnText }) => {
         });
     } else {
       axios
-        .post(`${API_HOST}/measurements`, data)
+        .post(`${API_HOST}/measurements`, data, {headers: {'authorization': authStr} })
         .then((res) => {
           const { error, message } = res.data;
           if (error) {

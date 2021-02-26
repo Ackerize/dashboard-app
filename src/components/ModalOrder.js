@@ -15,8 +15,10 @@ const ModalOrder = ({ showModal, setShowModal, order }) => {
     const requestBody = {
       status: newStatus,
     };
+    const idToken = localStorage.getItem('idToken');
+    const authStr = 'Bearer '.concat(idToken);
     axios
-      .put(`${API_HOST}/orders/status/${id}`, requestBody)
+      .put(`${API_HOST}/orders/status/${id}`, requestBody, {headers: {'authorization': authStr} })
       .then((res) => {
         console.log(res.data.message);
         setShowModal(false);
