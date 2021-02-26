@@ -28,8 +28,6 @@ const Paintings = () => {
     setFilteredPaintings(paintingsFilter);
   }, [filterWord]);
 
-  if (!paintingsArray) return null;
-
   return (
     <div>
       <h1 className="text-center text-uppercase mt-4 mb-3">Paintings</h1>
@@ -37,7 +35,7 @@ const Paintings = () => {
         <Button type="add" />
         <Search setFilterWord={setFilterWord} />
       </div>
-      <TablePaintings paintingsArray={filteredPaintings} />
+      {paintingsArray && <TablePaintings paintingsArray={filteredPaintings} />}
     </div>
   );
 };

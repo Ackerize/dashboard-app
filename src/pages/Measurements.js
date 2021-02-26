@@ -43,8 +43,6 @@ const Measurements = () => {
     setFilteredMeasurements(measurementsFilter);
   }, [searchedWord]);
 
-  if (!measurements || !materials) return null;
-
   return (
     <div>
       <h1 className="text-center text-uppercase mt-4 mb-3">Measurements</h1>
@@ -52,10 +50,12 @@ const Measurements = () => {
         <Button type="new" onClick={handleClick} />
         <Search setFilterWord={setSearchedWord} />
       </div>
-      <TableMeasurements
-        measurementsArray={filteredMeasurements}
-        materialsArray={materials}
-      />
+      {measurements && materials && (
+        <TableMeasurements
+          measurementsArray={filteredMeasurements}
+          materialsArray={materials}
+        />
+      )}
     </div>
   );
 };

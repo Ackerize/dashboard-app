@@ -34,8 +34,6 @@ const Materials = () => {
     setFilteredMaterials(materialsFilter);
   }, [searchedWord]);
 
-  if (!materials) return null;
-
   return (
     <div>
       <h1 className="text-center text-uppercase mt-4 mb-3">Materials</h1>
@@ -43,7 +41,8 @@ const Materials = () => {
         <Button type="new" onClick={handleClick} />
         <Search setFilterWord={setSearchedWord} />
       </div>
-      <TableMaterials materialsArray={filteredMaterials} />
+      {materials && <TableMaterials materialsArray={filteredMaterials} />}
+      
     </div>
   );
 };

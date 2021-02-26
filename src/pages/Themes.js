@@ -32,8 +32,6 @@ const Themes = () => {
     setFilteredThemes(themesFilter);
   }, [searchedWord]);
 
-  if (!themes) return null;
-
   return (
     <div>
       <h1 className="text-center text-uppercase mt-4 mb-3">Themes</h1>
@@ -41,7 +39,7 @@ const Themes = () => {
         <Button type="new" onClick={handleClick} />
         <Search setFilterWord={setSearchedWord} />
       </div>
-      <TableThemes themesArray={filteredThemes} />
+      {themes && <TableThemes themesArray={filteredThemes} />}
     </div>
   );
 };
