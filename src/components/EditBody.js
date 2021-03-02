@@ -255,7 +255,7 @@ const EditBody = ({ painting }) => {
                 className="input--style-5"
                 type="text"
                 name="description"
-                ref={register({ required: true })}
+                ref={register({ required: false })}
                 defaultValue={description}
               />
               {errors.description && (

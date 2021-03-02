@@ -48,7 +48,7 @@ const RowPaintings = ({ painting }) => {
         <img src={image_url} alt={`Cuadro-${id}`} className="img-display" />
       </th>
       <td>{name}</td>
-      <td className="description-cell col-5">{description}</td>
+      <td className="description-cell col-5">{description ? description : 'Sin descripción'}</td>
       <td>{active ? "Si" : "No"}</td>
       <td colSpan="2" className="col-1">
         <div className="cell-container">

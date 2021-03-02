@@ -166,7 +166,7 @@ const CardBody = ({ btnText }) => {
                 className="input--style-5"
                 type="text"
                 name="description"
-                ref={register({ required: true })}
+                ref={register({ required: false })}
               />
               {errors.description && (
                 <div className="error">Ingresa la descripción del cuadro</div>
