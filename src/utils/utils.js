@@ -50,8 +50,8 @@ export const cabecerasMeasurements = [
   "Opciones",
 ];
 
-export const API_HOST = "https://protected-ocean-09865.herokuapp.com/v1";
-
+export const API_HOST = "https://api-o.canvasframeit.com/v1.0.0";
+//https://protected-ocean-09865.herokuapp.com/v1
 const characters =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 

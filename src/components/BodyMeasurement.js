@@ -55,6 +55,7 @@ const BodyMeasurement = ({ btnText }) => {
               timer: 1400,
             });
             setTimeout(() => {
+              localStorage.clear();
               history.push("/measurements");
             }, 1500);
           }
